@@ -1,0 +1,60 @@
+<!-- Create a login form that requires an email and a password -->
+<div class="container">
+
+    <!-- Auto-adjusting div -->
+    <div class="col-sm-12 col-md-6 px-3 mt-3 mx-auto"
+        style="padding: 3px; background-color: lightgray; border-radius: 5px;">
+
+        <!-- Display the login form -->
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+            <div class="my-3">
+                <h1 class="display-6 text-center">Register</h1>
+            </div>
+
+            <div class="mb-3">
+                <!-- Prompt the user for the name -->
+                <label for="name" class="form-label">Name</label>
+                <input type="text" id="name" formControlName="name" placeholder="Name" class="form-control">
+
+                <!-- Display validation errors -->
+                <div *ngIf="registerForm.controls.email.invalid && isSubmitted">
+                    <p class="text-danger form-text">Provide a name between 3-20 characters.</p>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <!-- Prompt the user for the email -->
+                <label for="email" class="form-label">Email</label>
+                <input type="text" id="email" formControlName="email" placeholder="Email" class="form-control">
+
+                <!-- Display validation errors -->
+                <div *ngIf="registerForm.controls.email.invalid && isSubmitted">
+                    <p class="text-danger form-text">Provide a valid email.</p>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <!-- Prompt the user from the password -->
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" formControlName="password" placeholder="Password"
+                    class="form-control">
+
+                <!-- Display validation errors -->
+                <div *ngIf="registerForm.controls.password.invalid && isSubmitted">
+                    <p class="text-danger form-text">Provide a password between 8-20 characters.</p>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <!-- Submit the form -->
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </form>
+
+        <!-- Display the error message if the login fails -->
+        <div *ngIf="accountExists">
+            <p class="text-danger">An account already exists with that email.</p>
+        </div>
+    </div>
+</div>
