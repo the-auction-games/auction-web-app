@@ -11,6 +11,7 @@ import { MarketComponent } from './market/market.component';
 import { RegisterComponent } from './register/register.component';
 import { GridViewAuctionComponent } from './grid-view-auction/grid-view-auction.component';
 import { PageViewAuctionComponent } from './page-view-auction/page-view-auction.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PageViewAuctionComponent } from './page-view-auction/page-view-auction.
     MarketComponent,
     RegisterComponent,
     GridViewAuctionComponent,
-    PageViewAuctionComponent
+    PageViewAuctionComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
