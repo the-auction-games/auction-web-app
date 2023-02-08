@@ -15,7 +15,7 @@ export class PageViewAuctionComponent {
   protected auction: Auction | undefined;
 
   // Check if the viewer is the seller
-  protected isSeller: boolean = true;
+  protected isSeller: boolean = false;
 
   // Control input for the bid amount
   protected bid = new FormControl('');
