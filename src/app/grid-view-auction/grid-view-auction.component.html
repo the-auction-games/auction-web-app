@@ -1,0 +1,27 @@
+<!-- The auction card -->
+<div class="card tag-container" style="width: 18rem;">
+    <!-- The auction image -->
+    <img class="card-img-top" src="data:image/png;base64, {{ auction?.base64Image }}" alt="Auction image">
+
+    <!-- The auction details -->
+    <div class="card-body">
+
+        <!-- The auction title -->
+        <h4 class="card-title">{{ auction?.title }}</h4>
+
+        <!-- The auction short description -->
+        <!-- TODO: IMPLEMENT FUNCTION TO GET SHORT DESCRIPTION -->
+        <p class="card-text">{{ auction?.description }}</p>
+
+        <!-- The Auction start bid -->
+        <p class="card-text">Start bid: {{ auction?.startBid }}</p>
+
+        <!-- The Auction total bids -->
+        <p class="card-text">Total bids: {{ auction?.bids?.length }}</p>
+
+        <!-- Button to view -->
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-primary" style="width:80%;" (click)="onView()">View</button>
+        </div>
+    </div>
+</div>

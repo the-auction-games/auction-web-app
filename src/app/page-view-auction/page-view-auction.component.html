@@ -1,0 +1,164 @@
+<!-- Grid -->
+<div class="container mt-3">
+    
+    <!-- Back to Market Button -->
+    <div class="row my-3">
+        <div>
+            <a routerLink="/market" class="btn btn-primary">
+                Back to Market
+            </a>
+        </div>
+    </div>
+
+    <!-- Logo & General Info Row -->
+    <div class="row m-1 tag-container">
+
+        <!-- Logo -->
+        <div class="col-sm-6 col-md-4">
+            <div>
+                <img class="" src="data:image/png;base64, {{ auction?.base64Image }}" alt="Auction image"
+                    style="width: 70%">
+            </div>
+        </div>
+
+        <!-- General Info -->
+        <div class="col-sm-6 col-md-8">
+            <h4 class="">{{ auction?.title }}</h4>
+            <p class="">{{ auction?.description }}</p>
+            <p>Seller: <a href="">ADD SELLER HERE</a></p>
+        </div>
+
+    </div>
+
+    <!-- Bidding & Purchasing Row -->
+    <div class="row m-1 justify-content-between">
+
+        <!-- Bidding -->
+        <div class="col-md-6 tag-container me-1">
+
+            <!-- Bidding header -->
+            <div class="my-3">
+                <h2 class="text-center">Bidding</h2>
+            </div>
+
+            <!-- Bid Info -->
+            <div class="row align-items-evenly text-center">
+
+                <!-- Start Bid -->
+                <div class="col-sm-4">
+                    <p>Starting Bid</p>
+                    <p>${{ auction?.startBid }}</p>
+                </div>
+
+                <!-- Current Bid -->
+                <div class="col-sm-4">
+                    <p>Current Bid</p>
+                    <p>$TODO</p>
+                </div>
+
+                <!-- # of Bids -->
+                <div class="col-sm-4">
+                    <p># of Bids</p>
+                    <p>{{ auction?.bids?.length }}</p>
+                </div>
+            </div>
+
+            <!-- Bid Input -->
+            <div class="row m-1">
+
+                <!-- Bid Input -->
+                <div class="col-sm-8">
+                    <div class="input-group w-75 mx-auto">
+                        <span class="input-group-text">$</span>
+                        <div class="form-floating">
+                            <input type="text" id="bid" class="form-control" placeholder="0" [formControl]="bid">
+                            <label for="bid">Your Bid</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spacer for xs screens -->
+                <div class="w-100 d-block d-sm-none pt-2">
+                </div>
+
+                <!-- Submit Button -->
+                <div class="col-sm-4">
+                    <div class="d-flex align-items-center justify-content-center h-100">
+                        <button class="btn btn-primary" (click)="onBid()">Place Bid</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bidding Note -->
+            <div>
+                <div class="mx-3 mb-3">
+                    <br>
+                    <h6>Note</h6>
+                    <p>
+                        By placing a bid, you are offering to purchase this product or service at the price you have
+                        provided.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- BIN -->
+        <div class="col-md-5 tag-container">
+
+            <!-- BIN header -->
+            <div class="my-3">
+                <h2 class="text-center">Buy It Now</h2>
+            </div>
+
+            <!-- BIN Info -->
+            <div class="row align-items-evenly text-center">
+                <div class="col-sm-12">
+                    <p>BIN Price:</p>
+                    <p>${{ auction?.binPrice }}</p>
+                </div>
+            </div>
+
+            <!-- BIN Button -->
+            <div class="row m-1">
+
+                <!-- Submit Button -->
+                <div class="col-sm-12">
+                    <div class="d-flex align-items-center justify-content-center h-100 p-2">
+                        <button class="btn btn-primary" (click)="onBuy()">Buy It Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BIN Note -->
+            <div>
+                <div class="mx-3 mb-3">
+                    <br>
+                    <h6>Note</h6>
+                    <p>
+                        By clicking 'Buy It Now', you are agreeing to purchase this product or service at the full
+                        price listed above.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Edit Row // Display the edit button if the viewer is the seller -->
+    <div class="row mx-1 tag-container" *ngIf="isSeller">
+
+        <!-- Center-Aligned Edit -->
+        <div class="mx-auto text-center">
+
+            <!-- Edit header -->
+            <div class="my-3">
+                <h2 class="text-center">Edit</h2>
+                <p>You are the seller.</p>
+            </div>
+
+            <!-- Edit Button -->
+            <button type="button" class="btn btn-success" (click)="onEdit()">Edit Auction</button>
+        </div>
+    </div>
+
+</div>

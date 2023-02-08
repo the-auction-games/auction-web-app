@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AccountService } from '../account-validation/account.service';
+import { AccountService } from '../account/account.service';
 import { Account } from 'src/app/models/account.model';
 import { CanActivate, Router } from '@angular/router';
 import { BehaviorSubject, map, Observable, of, Subject } from 'rxjs';
@@ -45,7 +45,7 @@ export class AuthService implements CanActivate {
   // Login with credentials
   public onLogin(email: string, password: string, callback: (success: boolean) => void) {
     // Try to validate the account with the credentials
-    this.accounts.validateAccount(email, password).subscribe(account => {
+    this.accounts.validate(email, password).subscribe(account => {
 
       // The account does not exist
       if (account == null) {
@@ -139,8 +139,8 @@ export class AuthService implements CanActivate {
         }
 
         // Log the session
-        console.log('Checking if session is expired...');
-        console.log(session);
+        // console.log('Checking if session is expired...');
+        // console.log(session);
 
         // Return if the session has expired
         return new Date().getTime() < session.expirationTimestamp;

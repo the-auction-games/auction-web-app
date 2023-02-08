@@ -2,13 +2,15 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { MarketComponent } from './market/market.component';
+import { PageViewAuctionComponent } from './page-view-auction/page-view-auction.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthService } from './services/auth/auth.service';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },
-  { path: 'market', component: MarketComponent, pathMatch: 'full', canActivate: [AuthService] }
+  { path: 'market/:auctionId', component: PageViewAuctionComponent, canActivate: [AuthService] },
+  { path: 'market', component: MarketComponent, pathMatch: 'full', canActivate: [AuthService] },
 ];
 
 @NgModule({

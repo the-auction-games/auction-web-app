@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Account } from '../models/account.model';
-import { AccountService } from '../services/account-validation/account.service';
+import { AccountService } from '../services/account/account.service';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -48,7 +48,7 @@ export class RegisterComponent {
     }
 
     // Attempt to create the account, handle response codes
-    this.accounts.createAccount(account).subscribe(status => {
+    this.accounts.create(account).subscribe(status => {
 
       // Log the code
       console.log(`Trying to create an account... response code: ${status}`);

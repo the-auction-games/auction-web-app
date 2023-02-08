@@ -18,7 +18,7 @@ export class AccountService extends DaprService {
   }
 
   // Get an account based off the id.
-  public getAccountById(id: string): Observable<Account | null> {
+  public getById(id: string): Observable<Account | null> {
     // The url to the user api
     let url = `${this.baseUrl}/id/${id}`;
 
@@ -31,7 +31,7 @@ export class AccountService extends DaprService {
   }
 
   // Get an account based off the email.
-  public getAccountByEmail(email: string): Observable<Account | null> {
+  public getByEmail(email: string): Observable<Account | null> {
     // The url to the user api
     let url = `${this.baseUrl}/id/${email}`;
 
@@ -44,7 +44,7 @@ export class AccountService extends DaprService {
   }
 
   // Create an account
-  public createAccount(account: Account): Observable<number> {
+  public create(account: Account): Observable<number> {
     // The url to the user api
     let url = `${this.baseUrl}`;
 
@@ -57,7 +57,7 @@ export class AccountService extends DaprService {
   }
 
   // Update an account
-  public updateAccount(account: Account): Observable<number> {
+  public update(account: Account): Observable<number> {
     // The url to the user api
     let url = `${this.baseUrl}`;
 
@@ -70,7 +70,7 @@ export class AccountService extends DaprService {
   }
 
   // Delete an account by id
-  public deleteAccount(id: string): Observable<number> {
+  public delete(id: string): Observable<number> {
     // The url to the user api
     let url = `${this.baseUrl}/id/${id}`;
 
@@ -83,7 +83,7 @@ export class AccountService extends DaprService {
   }
 
   // Valdate an account based on the email and password.
-  public validateAccount(email: string, password: string): Observable<Account | null> {
+  public validate(email: string, password: string): Observable<Account | null> {
     // The url to the user api
     let url = `${this.baseUrl}/validate`;
 
