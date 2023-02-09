@@ -3,29 +3,32 @@
 
     <!-- Marketplace heading -->
     <div class="tag-container row justify-content-between align-items-center p-3">
-        
+
         <!-- The market header -->
-        <div class="col-6">
+        <div class="col-9">
             <h1>Welcome to the Market</h1>
+            <p>Select an auction from below to view more details.</p>
         </div>
 
         <!-- Create auction button -->
         <div class="col-2 m-3">
-            <a routerLink="/market/new" class="btn btn-success">
-                Add Auction Listing
+            <a routerLink="/market/new" class="btn btn-secondary btn-outline-warning">
+                Auction An Item
             </a>
         </div>
 
         <!-- The search bar -->
         <div class="col-12">
-            <input type="text" class="form-control" placeholder="Search for an auction">
+            <input type="text" class="form-control" placeholder="Search for an auction (WIP)">
         </div>
     </div>
+</div>
 
-    <!-- The auctions on the market -->
-    <div class="mt-3">
+<!-- The auctions on the market -->
+<div class="container">
+    <div class="mt-1">
         <div class="row">
-            <div *ngFor="let auction of allAuctions" class="col-3">
+            <div *ngFor="let auction of allAuctions" class="col-md-6 col-lg-4 my-1">
                 <grid-view-auction [auction]="auction"></grid-view-auction>
             </div>
         </div>

@@ -1,27 +1,36 @@
-<!-- The auction card -->
-<div class="card tag-container" style="width: 18rem;">
-    <!-- The auction image -->
-    <img class="card-img-top" src="data:image/png;base64, {{ auction?.base64Image }}" alt="Auction image">
+<!-- The auction base container -->
+<div class="tag-container w-100 h-100">
 
-    <!-- The auction details -->
-    <div class="card-body">
+    <!-- Link to direct to view page -->
+    <a (click)="onView()" style="cursor: pointer">
 
-        <!-- The auction title -->
-        <h4 class="card-title">{{ auction?.title }}</h4>
+        <!-- The clickable area -->
+        <div>
 
-        <!-- The auction short description -->
-        <!-- TODO: IMPLEMENT FUNCTION TO GET SHORT DESCRIPTION -->
-        <p class="card-text">{{ auction?.description }}</p>
+            <!-- The auction image -->
+            <div class="tag-image-container">
+                <img class="tag-image" src="data:image/png;base64, {{ auction?.base64Image }}" alt="Auction image">
+            </div>
 
-        <!-- The Auction start bid -->
-        <p class="card-text">Start bid: {{ auction?.startBid }}</p>
+            <!-- The auction details -->
+            <div class="text-center">
+                <!-- The auction title -->
+                <h4>{{ auction?.title }}</h4>
 
-        <!-- The Auction total bids -->
-        <p class="card-text">Total bids: {{ auction?.bids?.length }}</p>
+                <!-- Starting Bid -->
+                <p>Current Bid: ${{ auction?.startBid }}</p>
 
-        <!-- Button to view -->
-        <div class="d-flex justify-content-center">
-            <button class="btn btn-primary" style="width:80%;" (click)="onView()">View</button>
+                <p>{{ auction?.description }}</p>
+
+                <!-- Expires -->
+                <p>Expires In: Xs</p>
+
+                <!-- Total Bids -->
+                <p>Total bids: {{ auction?.bids?.length }}</p>
+            </div>
+
         </div>
-    </div>
+
+    </a>
+
 </div>

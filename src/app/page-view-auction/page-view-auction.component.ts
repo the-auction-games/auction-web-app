@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import Auction from '../models/auction.model';
 import { AccountService } from '../services/account/account.service';
+import { AuctionSyncService } from '../services/auction-sync/auction-sync.service';
 import { AuctionService } from '../services/auction/auction.service';
 import { AuthService } from '../services/auth/auth.service';
 
@@ -15,6 +16,9 @@ export class PageViewAuctionComponent {
 
   // The auction
   protected auction: Auction | undefined;
+
+  // Update timer
+  private updateTimer: NodeJS.Timer | undefined;
 
   // Check if the viewer is the seller
   protected isSeller: boolean = false;
@@ -33,6 +37,7 @@ export class PageViewAuctionComponent {
     private route: ActivatedRoute,
     private router: Router,
     private auctions: AuctionService,
+    private sync: AuctionSyncService,
     private auth: AuthService,
     private accounts: AccountService
   ) { }
@@ -62,6 +67,9 @@ export class PageViewAuctionComponent {
           // Set the auction
           this.auction = res;
 
+          // Update the auction every 5 seconds
+          this.updateTimer = this.sync.updateAuction(this.auction, 5000);
+
           // Get the seller's name
           this.accounts.getById(this.auction?.sellerId).subscribe(account => {
             // Set seller name if account is not null
@@ -78,6 +86,12 @@ export class PageViewAuctionComponent {
         });
       }
     });
+  }
+
+  // On destroy
+  ngOnDestroy(): void {
+    // Clear the sync timer
+    if (this.updateTimer) clearInterval(this.updateTimer);
   }
 
   // Called when a user tries to bid on an auction.
