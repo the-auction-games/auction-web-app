@@ -1,6 +1,6 @@
 <!-- Grid -->
 <div class="container mt-3">
-    
+
     <!-- Back to Market Button -->
     <div class="row my-3">
         <div>
@@ -25,7 +25,7 @@
         <div class="col-sm-6 col-md-8">
             <h4 class="">{{ auction?.title }}</h4>
             <p class="">{{ auction?.description }}</p>
-            <p>Seller: <a href="">ADD SELLER HERE</a></p>
+            <p>Seller: <a routerLink="/account/{{ auction?.sellerId }}" class="link-secondary">{{ sellerName }}</a></p>
         </div>
 
     </div>
@@ -71,7 +71,7 @@
                     <div class="input-group w-75 mx-auto">
                         <span class="input-group-text">$</span>
                         <div class="form-floating">
-                            <input type="text" id="bid" class="form-control" placeholder="0" [formControl]="bid">
+                            <input type="number" id="bid" class="form-control" placeholder="0" [formControl]="bid">
                             <label for="bid">Your Bid</label>
                         </div>
                     </div>
@@ -87,6 +87,11 @@
                         <button class="btn btn-primary" (click)="onBid()">Place Bid</button>
                     </div>
                 </div>
+            </div>
+
+            <!-- Display validation errors -->
+            <div class="mx-auto text-center" *ngIf="bid.invalid && isSubmitted">
+                <p class="text-danger form-text">Provide a bid greater than the current bid.</p>
             </div>
 
             <!-- Bidding Note -->
@@ -161,7 +166,7 @@
             </div>
 
             <!-- Edit Button -->
-            <button type="button" class="btn btn-success" (click)="onEdit()">Edit Auction</button>
+            <button type="button" class="btn btn-success mb-3" (click)="onEdit()">Edit Auction</button>
         </div>
     </div>
 

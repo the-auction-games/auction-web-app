@@ -19,3 +19,14 @@ body {
     background-color: rgba(0, 0, 0, 0.1);
     color: rgba(255, 255, 255, 0.5);
 }
+
+.tag-image-container {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.tag-image {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}

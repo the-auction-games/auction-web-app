@@ -44,41 +44,41 @@ export class AccountService extends DaprService {
   }
 
   // Create an account
-  public create(account: Account): Observable<number> {
+  public create(account: Account): Observable<boolean> {
     // The url to the user api
     let url = `${this.baseUrl}`;
 
     // Make the request
     return this.http.post(url, account, { headers: this.defaultHeaders, observe: 'response' })
       .pipe(
-        map(res => res.status),
-        catchError(error => of(error.status))
+        map(res => res.status === 201),
+        catchError(error => of(false))
       );
   }
 
   // Update an account
-  public update(account: Account): Observable<number> {
+  public update(account: Account): Observable<boolean> {
     // The url to the user api
     let url = `${this.baseUrl}`;
 
     // Make the request
     return this.http.put(url, account, { headers: this.defaultHeaders, observe: 'response' })
       .pipe(
-        map(res => res.status),
-        catchError(error => of(error.status))
+        map(res => res.status === 204),
+        catchError(error => of(false))
       );
   }
 
   // Delete an account by id
-  public delete(id: string): Observable<number> {
+  public delete(id: string): Observable<boolean> {
     // The url to the user api
     let url = `${this.baseUrl}/id/${id}`;
 
     // Make the request
     return this.http.delete(url, { headers: this.defaultHeaders, observe: 'response' })
       .pipe(
-        map(res => res.status),
-        catchError(error => of(error.status))
+        map(res => res.status === 204),
+        catchError(error => of(false))
       );
   }
 

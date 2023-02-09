@@ -48,29 +48,24 @@ export class RegisterComponent {
     }
 
     // Attempt to create the account, handle response codes
-    this.accounts.create(account).subscribe(status => {
+    this.accounts.create(account).subscribe(success => {
 
       // Log the code
-      console.log(`Trying to create an account... response code: ${status}`);
+      console.log(`Trying to create an account... Success: ${success}`);
 
-      switch (status) {
-        case 201:
-          // Redirect to the login page
-          this.router.navigate(['/login']);
-          break;
-        case 409:
-          // Notify of invalid credentials
-          this.accountExists = true;
-
-          // Log the error
-          console.log('Account already exists');
-
-          // Reset the password
-          this.registerForm.controls['password'].setValue('');
-          break;
-        default:
-          break;
-      };
+      if (success) {
+        // Redirect to the login page
+        this.router.navigate(['/login']);
+      } else {
+        // Notify of invalid credentials
+        this.accountExists = true;
+        
+        // Log the error
+        console.log('Account already exists');
+        
+        // Reset the password
+        this.registerForm.controls['password'].setValue('');
+      }
     });
 
   }

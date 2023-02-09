@@ -12,6 +12,7 @@ import { RegisterComponent } from './register/register.component';
 import { GridViewAuctionComponent } from './grid-view-auction/grid-view-auction.component';
 import { PageViewAuctionComponent } from './page-view-auction/page-view-auction.component';
 import { FooterComponent } from './footer/footer.component';
+import { EditAuctionComponent } from './edit-auction/edit-auction.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FooterComponent } from './footer/footer.component';
     RegisterComponent,
     GridViewAuctionComponent,
     PageViewAuctionComponent,
-    FooterComponent
+    FooterComponent,
+    EditAuctionComponent
   ],
   imports: [
     BrowserModule,

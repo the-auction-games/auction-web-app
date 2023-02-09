@@ -147,4 +147,21 @@ export class AuthService implements CanActivate {
       })
     );
   }
+
+  // Get the account id of the authenticated user
+  public getAccountId(): Observable<string | null> {
+    // Get the session
+    return this.sessions.get().pipe(
+      map(session => {
+
+        // No session was found
+        if (session == null) {
+          return null;
+        }
+
+        // Return the account id
+        return session.accountId;
+      })
+    );
+  }
 }
