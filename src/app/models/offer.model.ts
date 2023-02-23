@@ -1,6 +1,6 @@
 // The bid model
-export default interface Bid {
-    bidderId: string,
+export default interface Offer {
+    userId: string,
     price: number,
     creationTimestamp: number
 }

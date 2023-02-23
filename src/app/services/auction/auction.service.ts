@@ -2,9 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
 import Auction from 'src/app/models/auction.model';
-import Bid from 'src/app/models/bid.model';
+import Offer from 'src/app/models/offer.model';
 import { DaprService } from '../dapr.service';
-import { BidStatus } from './bid-status.enum';
+import { OfferStatus } from './offer-status.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -85,14 +85,14 @@ export class AuctionService extends DaprService {
   }
 
   // Get all bids for an auction
-  public getBids(id: string): Observable<Bid[]> {
+  public getBids(id: string): Observable<Offer[]> {
     // The url
     let url = `${this.baseUrl}/${id}/bids`;
 
     // Make the request
-    return this.http.get<Bid[]>(url, { headers: this.defaultHeaders, observe: 'response' })
+    return this.http.get<Offer[]>(url, { headers: this.defaultHeaders, observe: 'response' })
       .pipe(
-        map(res => res.body as Bid[]),
+        map(res => res.body as Offer[]),
         catchError(error => of([]))
       );
   }
@@ -101,19 +101,33 @@ export class AuctionService extends DaprService {
   //
   // Returns the status code of the request:
   //  201 - Bid created
+  //  400 - Auction already purchased
   //  404 - Auction not found
   //  406 - Auction expired
-  //  409 - Bid is too low
+  //  409 - Bid is too low or high
   //  500 - Internal server error
-  public createBid(id: string, bid: Bid): Observable<BidStatus> {
+  public createBid(id: string, bid: Offer): Observable<OfferStatus> {
     // The url
     let url = `${this.baseUrl}/${id}/bids`;
 
     // Make the request
     return this.http.post(url, bid, { headers: this.defaultHeaders, observe: 'response' })
       .pipe(
-        map(res => res.status as BidStatus),
-        catchError(error => of(error.status as BidStatus))
+        map(res => res.status as OfferStatus),
+        catchError(error => of(error.status as OfferStatus))
+      );
+  }
+
+  // Purchase an auction
+  public purchase(id: String, purchase: Offer): Observable<OfferStatus> {
+    // The url
+    let url = `${this.baseUrl}/${id}/purchase`;
+
+    // Make the request
+    return this.http.post(url, purchase, { headers: this.defaultHeaders, observe: 'response' })
+      .pipe(
+        map(res => res.status as OfferStatus),
+        catchError(error => of(error.status as OfferStatus))
       );
   }
 }

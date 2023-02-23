@@ -1,4 +1,4 @@
-import Bid from "./bid.model";
+import Offer from "./offer.model";
 
 // The auction model
 export default interface Auction {
@@ -7,8 +7,9 @@ export default interface Auction {
     title: string,
     description: string,
     startBid: number,
-    bids: Bid[],
+    bids: Offer[],
     binPrice: number,
+    purchase: Offer | null,
     base64Image: string,
     creationTimestamp: number,
     expirationTimestamp: number

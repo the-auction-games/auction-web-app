@@ -23,6 +23,7 @@ export class EditAuctionComponent {
     startBid: 0,
     bids: [],
     binPrice: 0,
+    purchase: null,
     base64Image: '',
     creationTimestamp: new Date().getTime(),
     expirationTimestamp: new Date().setDate(new Date().getDate() + 7),
