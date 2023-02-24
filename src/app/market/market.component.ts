@@ -1,5 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import Auction from '../models/auction.model';
+import { AuctionSearchService } from '../services/auction-search/auction-search.service';
+import { AuctionSort } from '../services/auction-search/auction-sort.enum';
 import { AuctionService } from '../services/auction/auction.service';
 
 @Component({
@@ -12,9 +14,16 @@ export class MarketComponent {
   // All auctions in the market
   protected allAuctions: Auction[] = [];
 
+  // TODO: SEARCH BAR
+
+  // TODO: FILTER BY PRICE MIN / MAX
+
+  // TODO: SORT BY: TITLE, BID PRICE, TOTAL BIDS, BIN PRICE, TIME LEFT, NEWEST, OLDEST
+
+
   // Construct the market with the auction service
   constructor(
-    private auctions: AuctionService
+    private search: AuctionSearchService
   ) { }
 
   // Initialize the market
@@ -30,6 +39,6 @@ export class MarketComponent {
 
   // Refresh the auctions
   private refreshAuctions(): void {
-    this.auctions.getAll().subscribe(auctions => this.allAuctions = auctions);
+    this.search.get('', 100, 200, AuctionSort.TITLE).subscribe(auctions => this.allAuctions = auctions);
   }
 }
