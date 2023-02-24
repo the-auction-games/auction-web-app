@@ -19,7 +19,50 @@
 
         <!-- The search bar -->
         <div class="col-12">
-            <input type="text" class="form-control" placeholder="Search for an auction (WIP)">
+
+            <!-- The search form -->
+            <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+
+                <!-- Search by keyword -->
+                <div>
+                    <label for="keyword">Search</label>
+                    <input formControlName="keyword" type="text" id="keyword" class="form-control"
+                        placeholder="Search by keyword">
+                </div>
+
+                <!-- Get min price -->
+                <div>
+                    <label for="minPrice">Min Price</label>
+                    <input formControlName="minPrice" type="number" id="minPrice" class="form-control"
+                        placeholder="Min Price">
+                </div>
+
+                <!-- Get max price -->
+                <div>
+                    <label for="maxPrice">Max Price</label>
+                    <input formControlName="maxPrice" type="number" id="maxPrice" class="form-control"
+                        placeholder="Max Price">
+                </div>
+
+                <div class="">
+                    <!-- Label of sort option -->
+                    <label for="sort">Sort By</label>
+
+                    <!-- Drop down based off AuctionSort enum -->
+                    <select formControlName="sort" class="form-control">
+                        <!-- Loop through sort options -->
+                        <option *ngFor="let sort of sortOptions" [value]="sort">
+                            {{sort}}
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Submit button -->
+                <div class="my-1">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+
+            </form>
         </div>
     </div>
 </div>

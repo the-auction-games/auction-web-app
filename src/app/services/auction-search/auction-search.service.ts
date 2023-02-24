@@ -13,27 +13,31 @@ export class AuctionSearchService {
     private auctions: AuctionService
   ) { }
 
-  // Get all auctions in the marekt by title, price min / max, and sort them
-  public get(search: String, minPrice: number, maxPrice: number, sort: AuctionSort): Observable<Auction[]> {
+  // Get all auctions in the marekt by keyword, price min / max, and sort them
+  public get(keyword: String, minPrice: number, maxPrice: number, sort: AuctionSort): Observable<Auction[]> {
     return this.auctions.getAll()
       .pipe(
         // Remove expired auctions
-        map(auctions => auctions.filter(auction => auction.expirationTimestamp > Date.now())),
+        map(auctions => {
+          return auctions
+            // Filter out expired auctions
+            .filter(auction => auction.expirationTimestamp > Date.now())
 
-        // Filter by search
-        map(auctions => auctions.filter(auction => auction.title.toLowerCase().includes(search.toLowerCase()))),
+            // Filter the auctions by search
+            .filter(auction => auction.title.toLowerCase().includes(keyword.toLowerCase()))
 
-        // Filter by price min / max
-        map(auctions => auctions.filter(auction => {
-          // Get the last bid price
-          const lastBidPrice = auction.bids[auction.bids.length - 1].price;
+            // Filter the auctions by price
+            .filter(auction => {
+              // Get the last bid price
+              const lastBidPrice = auction.bids.length > 0 ? auction.bids[auction.bids.length - 1].price : auction.startBid;
 
-          // Check if the last bid price is between the min / max price
-          return lastBidPrice >= minPrice && lastBidPrice <= maxPrice;
-        })),
+              // Check if the last bid price is between the min / max price
+              return lastBidPrice >= minPrice && lastBidPrice <= maxPrice;
+            })
 
-        // Sort it
-        map(auctions => auctions.sort(this.getSortMethod(sort)))
+            // Sort the auctions
+            .sort(this.getSortMethod(sort));
+        }),
       );
   }
 
@@ -41,8 +45,12 @@ export class AuctionSearchService {
   private getSortMethod(sort: AuctionSort): (a: Auction, b: Auction) => number {
     switch (sort) {
       // Sort alphabetically by title
-      case AuctionSort.TITLE:
+      case AuctionSort.A_Z:
         return (a, b) => a.title.localeCompare(b.title);
+
+      // Sort reverse alphabetically by title
+      case AuctionSort.Z_A:
+        return (a, b) => b.title.localeCompare(a.title);
 
       // Sort by bid price
       case AuctionSort.BID_PRICE:
@@ -52,7 +60,7 @@ export class AuctionSearchService {
       case AuctionSort.TOTAL_BIDS:
         return (a, b) => a.bids.length - b.bids.length;
 
-        // Sort by BIN price
+      // Sort by BIN price
       case AuctionSort.BIN_PRICE:
         return (a, b) => a.binPrice - b.binPrice;
 
@@ -62,11 +70,11 @@ export class AuctionSearchService {
 
       // Sort by newest
       case AuctionSort.NEWEST:
-        return (a, b) => a.creationTimestamp - b.creationTimestamp;
+        return (a, b) => b.creationTimestamp - a.creationTimestamp;
 
       // Sort by oldest
       case AuctionSort.OLDEST:
-        return (a, b) => b.creationTimestamp - a.creationTimestamp;
+        return (a, b) => a.creationTimestamp - b.creationTimestamp;
     }
   }
 }
