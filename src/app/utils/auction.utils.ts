@@ -21,6 +21,25 @@ export default class AuctionUtils {
         return auction.expirationTimestamp < Date.now();
     }
 
+    // Get the current bid of an auction, default to start bid if no bids
+    public static getCurrentBid(auction?: Auction): number {
+        // Check if the auction is undefined
+        if (auction === undefined) return 0;
+
+        // Check if the auction has been purchased
+        if (this.isPurchased(auction)) {
+            return auction.purchase!.price;
+        }
+
+        // Check if the auction has bids
+        if (auction.bids.length > 0) {
+            return auction.bids[auction.bids.length - 1].price;
+        }
+
+        // Return the start bid
+        return auction.startBid;
+    }
+
     // Format the expiration date
     public static getFormattedExpiration(auction?: Auction): string {
         // Return '...' if the expiration isloading

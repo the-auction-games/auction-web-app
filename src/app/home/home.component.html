@@ -1,1 +1,77 @@
-<p>home works!</p>
+<div class="container mt-3">
+
+    <!-- Spacer -->
+    <div class="row my-3 border-bottom mt-3">
+    </div>
+
+    <!-- Basic info row -->
+    <div class="row justify-content-between align-items-center my-3">
+
+        <!-- Title -->
+        <div class="col-12 col-sm-5 text-center text-sm-start">
+            <h1>The Auction Games</h1>
+            <p>
+                Welcome to The Auction Games. An online marketplace for buying and selling goods and services.
+            </p>
+        </div>
+
+        <!-- Logo Image -->
+        <div class="col-12 col-sm-5">
+            <div class="tag-image-container">
+                <img src="../../assets/logo.png" class="tag-image" alt="Responsive image">
+            </div>
+        </div>
+    </div>
+
+    <!-- Spacer -->
+    <div class="row my-3 border-bottom">
+    </div>
+
+    <!-- Demo auction row -->
+    <div class="row justify-content-between align-items-center my-3">
+        <div class="col-12 col-sm-5 col-lg-4 p-3">
+
+            <!-- Demo Auction -->
+            <grid-view-auction [auction]="demoAuction" [isDemo]="true"></grid-view-auction>
+
+        </div>
+
+        <div class="col-12 col-sm-5">
+            <h1>How It Works</h1>
+            <p>After registering an account, you can browse the auction marketplace.</p>
+        </div>
+    </div>
+
+    <!-- Spacer -->
+    <div class="row my-3 border-bottom">
+    </div>
+
+    <!-- Recent activity row -->
+    <div class="row my-3">
+
+        <!-- Recent Activity -->
+        <div class="col-12 text-center">
+            <h1>Recent Activity</h1>
+        </div>
+
+        <!-- Demo 10 Activity -->
+        <div class="col-4" *ngFor="let i of [0,1,2,3,4,5,6,7,8]">
+            <div class="p-3 my-1" style="border: 1px solid black; border-radius: 10px;">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-2">
+                        <i class="fa-solid fa-user"></i>
+                        <i class="fa-solid fa-timer"></i>
+                    </div>
+
+                    <div class="col-6">
+                        New User XYZ
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Spacer -->
+    <div class="row my-3 border-bottom">
+    </div>
+</div>

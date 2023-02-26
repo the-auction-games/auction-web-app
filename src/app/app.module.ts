@@ -14,6 +14,8 @@ import { PageViewAuctionComponent } from './page-view-auction/page-view-auction.
 import { FooterComponent } from './footer/footer.component';
 import { EditAuctionComponent } from './edit-auction/edit-auction.component';
 import { HomeComponent } from './home/home.component';
+import { ActivityGridComponent } from './activity-grid/activity-grid.component';
+import { GridViewActivityComponent } from './grid-view-activity/grid-view-activity.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { HomeComponent } from './home/home.component';
     PageViewAuctionComponent,
     FooterComponent,
     EditAuctionComponent,
-    HomeComponent
+    HomeComponent,
+    ActivityGridComponent,
+    GridViewActivityComponent
   ],
   imports: [
     BrowserModule,

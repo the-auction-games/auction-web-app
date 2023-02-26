@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { filter, map, Observable } from 'rxjs';
 import Auction from 'src/app/models/auction.model';
+import AuctionUtils from 'src/app/utils/auction.utils';
 import { AuctionService } from '../auction/auction.service';
 import { AuctionSort } from './auction-sort.enum';
 
@@ -9,6 +10,7 @@ import { AuctionSort } from './auction-sort.enum';
 })
 export class AuctionSearchService {
 
+  // Construct the auction service
   constructor(
     private auctions: AuctionService
   ) { }
@@ -54,14 +56,7 @@ export class AuctionSearchService {
 
       // Sort by bid price
       case AuctionSort.BID_PRICE:
-        return (a, b) => {
-          // Get the last bid price or the start bid price
-          let aPrice = a.bids.length > 0 ? a.bids[a.bids.length - 1].price : a.startBid;
-          let bPrice = b.bids.length > 0 ? b.bids[b.bids.length - 1].price : b.startBid;
-
-          // Return the difference
-          return aPrice - bPrice;
-        };
+        return (a, b) => AuctionUtils.getCurrentBid(a) - AuctionUtils.getCurrentBid(b);
 
       // Sort by total bids
       case AuctionSort.TOTAL_BIDS:
