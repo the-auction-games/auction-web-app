@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AccountService } from '../account/account.service';
-import { Account } from 'src/app/models/account.model';
 import { CanActivate, Router } from '@angular/router';
 import { BehaviorSubject, map, Observable, of, Subject } from 'rxjs';
 import { SessionService } from '../session/session.service';

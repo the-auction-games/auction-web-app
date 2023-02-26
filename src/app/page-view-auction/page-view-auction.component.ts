@@ -1,14 +1,18 @@
 import { Component, Input, TRANSLATIONS } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { switchMap } from 'rxjs';
 import Auction from '../models/auction.model';
 import Offer from '../models/offer.model';
 import { AccountService } from '../services/account/account.service';
+import { ActivityType } from '../services/activity/activity-type.enum';
+import { ActivityService } from '../services/activity/activity.service';
 import { AuctionSyncService } from '../services/auction-sync/auction-sync.service';
 import { AuctionService } from '../services/auction/auction.service';
 import { OfferStatus } from '../services/auction/offer-status.enum';
 import { AuthService } from '../services/auth/auth.service';
-import AuctionUtils from '../utils/auction.utils';
+import { ActivityUtils } from '../services/utils/activity.utils';
+import { AuctionUtils } from '../services/utils/auction.utils';
 
 @Component({
   selector: 'app-page-view-auction',
@@ -27,13 +31,13 @@ export class PageViewAuctionComponent {
   protected purchaserName: string = '';
 
   // The current bid
-  protected currentBid: Offer | undefined;
+  protected currentBid: Offer | undefined = undefined;
 
   // The top bidder
   protected topBidderName: string = '';
 
   // Update timer
-  private updateTimer: NodeJS.Timer | undefined;
+  private updateTimer: NodeJS.Timer | undefined = undefined;
 
   // The bidder
   protected bidderId: string = '';
@@ -63,7 +67,10 @@ export class PageViewAuctionComponent {
     private auctions: AuctionService,
     private sync: AuctionSyncService,
     private auth: AuthService,
-    private accounts: AccountService
+    private accounts: AccountService,
+    private auctionUtils: AuctionUtils,
+    private activities: ActivityService,
+    private activityUtils: ActivityUtils
   ) { }
 
   // On init
@@ -110,10 +117,7 @@ export class PageViewAuctionComponent {
           });
 
           // Update the auction every 5 seconds
-          this.updateTimer = this.sync.updateAuction(this.auction, 5000, (auction) => {
-            // Update the auction
-            this.updateAuction(auction);
-          });
+          this.updateTimer = this.sync.updateAuction(this.auction, 5000, this.updateAuction.bind(this));
         });
       }
     });
@@ -127,11 +131,13 @@ export class PageViewAuctionComponent {
 
   // Called when the component syncs with the auction service
   private updateAuction(auction: Auction): void {
-    // Update current bid
-    this.currentBid = auction.bids.length > 0 ? auction.bids[auction.bids.length - 1] : undefined;
-
     // Update top bidder name
-    if (this.currentBid !== undefined) {
+    if (auction.bids.length > 0) {
+
+      // Set the current bid
+      this.currentBid = auction.bids[auction.bids.length - 1];
+
+      // Get the top bidder's name
       this.accounts.getById(this.currentBid.userId).subscribe(account => {
         // Set top bidder name if account is not null
         if (account !== null) {
@@ -153,12 +159,12 @@ export class PageViewAuctionComponent {
 
   // Check if the auction has been purchased
   protected isPurchased(): boolean {
-    return AuctionUtils.isPurchased(this.auction);
+    return this.auctionUtils.isPurchased(this.auction);
   }
 
   // Check if the auction has expired
   protected isExpired(): boolean {
-    return AuctionUtils.isExpired(this.auction);
+    return this.auctionUtils.isExpired(this.auction);
   }
 
   // Check if the user can interact with the auction
@@ -204,6 +210,14 @@ export class PageViewAuctionComponent {
           this.bidErrorMessage = '';
           this.isBidSubmitted = false;
           this.bid.reset();
+
+          // Create activity for the new bid
+          this.auth.getAccountId().pipe(
+            switchMap(accountId => this.activityUtils.createActivityModel(accountId || '', ActivityType.CREATE_BID, this.auction)),
+          ).subscribe(activity => {
+            // Create the activity
+            this.activities.create(activity).subscribe((success) => { });
+          });
 
           // Notify of success
           alert('Bid placed successfully!');
@@ -259,6 +273,14 @@ export class PageViewAuctionComponent {
           this.purchaseErrorMessage = '';
           this.isPurchaseSubmitted = false;
           this.bid.reset();
+
+          // Create activity for the new purchase
+          this.auth.getAccountId().pipe(
+            switchMap(accountId => this.activityUtils.createActivityModel(accountId || '', ActivityType.PURCHASE_AUCTION, this.auction)),
+          ).subscribe(activity => {
+            // Create the activity
+            this.activities.create(activity).subscribe((success) => { });
+          });
 
           // Notify of success
           alert('You have purchased the auction!');

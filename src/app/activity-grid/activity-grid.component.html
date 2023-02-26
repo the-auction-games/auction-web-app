@@ -1,0 +1,12 @@
+<!-- Create row -->
+<div class="row">
+
+    <!-- Grid of activity -->
+    <div class="col-sm-6 col-lg-4 my-1" *ngFor="let act of activity">
+
+        <!-- Activity card -->
+        <grid-view-activity [activity]="act"></grid-view-activity>
+
+    </div>
+
+</div>

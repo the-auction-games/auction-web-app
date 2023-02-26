@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { Account } from '../models/account.model';
 import { AccountService } from '../services/account/account.service';
 import { v4 as uuidv4 } from 'uuid';
+import { ActivityUtils } from '../services/utils/activity.utils';
+import { ActivityService } from '../services/activity/activity.service';
+import { ActivityType } from '../services/activity/activity-type.enum';
 
 @Component({
   selector: 'app-register',
@@ -28,7 +31,9 @@ export class RegisterComponent {
   // Construct the login component with the auth service  
   constructor(
     private accounts: AccountService,
-    private router: Router
+    private router: Router,
+    private activityUtils: ActivityUtils,
+    private activities: ActivityService
   ) { }
 
   // Handle registration with the credentials
@@ -56,6 +61,12 @@ export class RegisterComponent {
       if (success) {
         // Redirect to the login page
         this.router.navigate(['/login']);
+
+        // Create activity
+        this.activityUtils.createActivityModel(account.id, ActivityType.CREATE_ACCOUNT).subscribe(activity => {
+          // Create the activity
+          this.activities.create(activity).subscribe((success) => { });
+        });
       } else {
         // Notify of invalid credentials
         this.accountExists = true;

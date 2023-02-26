@@ -6,7 +6,7 @@ body {
 }
 
 .tag-container {
-    padding: 3px; 
+    padding: 3px;
     background-color: lightgray; 
     border-radius: 5px;
 }
@@ -28,7 +28,7 @@ body {
     margin-left: auto;
     margin-right: auto;
 
-    border: 2px solid gray;
+    /* border: 2px solid gray; */
     border-radius: 15px;
     max-width: 100%;
     height: auto;

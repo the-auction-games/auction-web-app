@@ -1,10 +1,9 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { interval, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import Auction from '../models/auction.model';
 import { AuctionSearchService } from '../services/auction-search/auction-search.service';
 import { AuctionSort } from '../services/auction-search/auction-sort.enum';
-import { AuctionService } from '../services/auction/auction.service';
 
 @Component({
   selector: 'app-market',
