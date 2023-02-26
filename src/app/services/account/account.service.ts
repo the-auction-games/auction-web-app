@@ -18,7 +18,7 @@ export class AccountService extends DaprService {
   }
 
   // Get an account based off the id.
-  public getAccountById(id: string): Observable<Account | null> {
+  public getById(id: string): Observable<Account | null> {
     // The url to the user api
     let url = `${this.baseUrl}/id/${id}`;
 
@@ -31,7 +31,7 @@ export class AccountService extends DaprService {
   }
 
   // Get an account based off the email.
-  public getAccountByEmail(email: string): Observable<Account | null> {
+  public getByEmail(email: string): Observable<Account | null> {
     // The url to the user api
     let url = `${this.baseUrl}/id/${email}`;
 
@@ -44,46 +44,46 @@ export class AccountService extends DaprService {
   }
 
   // Create an account
-  public createAccount(account: Account): Observable<number> {
+  public create(account: Account): Observable<boolean> {
     // The url to the user api
     let url = `${this.baseUrl}`;
 
     // Make the request
     return this.http.post(url, account, { headers: this.defaultHeaders, observe: 'response' })
       .pipe(
-        map(res => res.status),
-        catchError(error => of(error.status))
+        map(res => res.status === 201),
+        catchError(error => of(false))
       );
   }
 
   // Update an account
-  public updateAccount(account: Account): Observable<number> {
+  public update(account: Account): Observable<boolean> {
     // The url to the user api
     let url = `${this.baseUrl}`;
 
     // Make the request
     return this.http.put(url, account, { headers: this.defaultHeaders, observe: 'response' })
       .pipe(
-        map(res => res.status),
-        catchError(error => of(error.status))
+        map(res => res.status === 204),
+        catchError(error => of(false))
       );
   }
 
   // Delete an account by id
-  public deleteAccount(id: string): Observable<number> {
+  public delete(id: string): Observable<boolean> {
     // The url to the user api
     let url = `${this.baseUrl}/id/${id}`;
 
     // Make the request
     return this.http.delete(url, { headers: this.defaultHeaders, observe: 'response' })
       .pipe(
-        map(res => res.status),
-        catchError(error => of(error.status))
+        map(res => res.status === 204),
+        catchError(error => of(false))
       );
   }
 
   // Valdate an account based on the email and password.
-  public validateAccount(email: string, password: string): Observable<Account | null> {
+  public validate(email: string, password: string): Observable<Account | null> {
     // The url to the user api
     let url = `${this.baseUrl}/validate`;
 

@@ -9,6 +9,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { MarketComponent } from './market/market.component';
 import { RegisterComponent } from './register/register.component';
+import { GridViewAuctionComponent } from './grid-view-auction/grid-view-auction.component';
+import { PageViewAuctionComponent } from './page-view-auction/page-view-auction.component';
+import { FooterComponent } from './footer/footer.component';
+import { EditAuctionComponent } from './edit-auction/edit-auction.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +20,11 @@ import { RegisterComponent } from './register/register.component';
     NavbarComponent,
     LoginComponent,
     MarketComponent,
-    RegisterComponent
+    RegisterComponent,
+    GridViewAuctionComponent,
+    PageViewAuctionComponent,
+    FooterComponent,
+    EditAuctionComponent
   ],
   imports: [
     BrowserModule,
