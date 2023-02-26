@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observer } from 'rxjs';
+import { Observer, switchMap } from 'rxjs';
 import Auction from '../models/auction.model';
 import { AuctionService } from '../services/auction/auction.service';
 import { v4 as uuidv4 } from 'uuid';
 import { AuthService } from '../services/auth/auth.service';
+import { ActivityType } from '../services/activity/activity-type.enum';
+import { ActivityService } from '../services/activity/activity.service';
+import { ActivityUtils } from '../services/utils/activity.utils';
 
 @Component({
   selector: 'app-edit-auction',
@@ -52,7 +55,9 @@ export class EditAuctionComponent {
     private route: ActivatedRoute,
     private router: Router,
     private auctions: AuctionService,
-    private auth: AuthService
+    private auth: AuthService,
+    private activities: ActivityService,
+    private activityUtils: ActivityUtils
   ) { }
 
   ngOnInit(): void {
@@ -177,14 +182,14 @@ export class EditAuctionComponent {
     // Display validation errors
     if (this.auctionForm.invalid) {
       // Set form to invalid
-      invalid = true;  
+      invalid = true;
     }
 
     // Ensure new auctions provide an image (existing auctions will default to the current image)
     if (this.auctionForm.controls.image.value === '' && this.isNew) {
       // Set image to invalid
       this.auctionForm.controls.image.setErrors({ 'required': true });
-      
+
       // Set form to invalid
       invalid = true;
     }
@@ -200,33 +205,44 @@ export class EditAuctionComponent {
     this.auction.startBid = Number(this.auctionForm.controls.startBid.value || 0);
     this.auction.binPrice = Number(this.auctionForm.controls.binPrice.value || 0);
 
-
     // Get base64 image and set it to the auction
     this.auction.base64Image = this.getBase64();
-
-    // Create an observer to handle the response
-    let observer: Observer<boolean> = {
-      next: (success) => {
-        // Check if successful
-        if (success) {
-          // Redirect to live listing 
-          this.router.navigate(['market', this.auction.id]);
-        } else {
-          // Notify user of failure
-          alert('Failed to save auction. Please try again.');
-        }
-      },
-      error: (err) => { },
-      complete: () => { }
-    };
 
     // Create or update the auction
     if (this.isNew) {
       // Create a new auction
-      this.auctions.create(this.auction).subscribe(observer);
+      this.auctions.create(this.auction).subscribe(success => {
+
+        // Check if successful
+        if (success) {
+          // Redirect to live listing 
+          this.router.navigate(['market', this.auction.id]);
+
+          // Create activity for the new auction
+          this.auth.getAccountId().pipe(
+            switchMap(accountId => this.activityUtils.createActivityModel(accountId || '', ActivityType.CREATE_AUCTION, this.auction)),
+          ).subscribe(activity => {
+            // Create the activity
+            this.activities.create(activity).subscribe((success) => { });
+          });
+
+        } else {
+          // Notify user of failure
+          alert('Failed to save auction. Please try again.');
+        }
+      });
     } else {
       // Update the auction
-      this.auctions.update(this.auction).subscribe(observer);
+      this.auctions.update(this.auction).subscribe(success => {
+          // Check if successful
+          if (success) {
+            // Redirect to live listing 
+            this.router.navigate(['market', this.auction.id]);
+          } else {
+            // Notify user of failure
+            alert('Failed to save auction. Please try again.');
+          }
+      });
     }
   }
 

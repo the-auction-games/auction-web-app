@@ -1,38 +1,32 @@
 <!-- The auction base container -->
-<div class="tag-container w-100 h-100">
+<div class="tag-container h-100" (click)="onView()" style="cursor: pointer">
 
-    <!-- Link to direct to view page -->
-    <a (click)="onView()" style="cursor: pointer">
+    <div>
 
-        <!-- The clickable area -->
-        <div>
-
-            <!-- The auction image -->
-            <div class="tag-image-container">
-                <img class="tag-image" src="data:image/png;base64, {{ auction?.base64Image }}" alt="Auction image">
-            </div>
-
-            <!-- The auction details -->
-            <div class="text-center">
-                <!-- The auction title -->
-                <h4>{{ auction?.title }}</h4>
-                <p>{{ auction?.description }}</p>
-
-                <!-- Expires -->
-                <p>Expires In: {{ expiration }}</p>
-
-                <!-- Starting Bid -->
-                <p>Current Bid: <strong>${{ currentBid }}</strong></p>
-
-                <!-- Total Bids -->
-                <p>Total bids: {{ auction?.bids?.length }}</p>
-
-                <!-- BIN Price -->
-                <p>Buy It Now: <strong>${{ auction?.binPrice }}</strong></p>
-            </div>
-
+        <!-- The auction image -->
+        <div class="tag-image-container">
+            <img class="tag-image" src="data:image/png;base64, {{ auction?.base64Image }}" alt="Auction image">
         </div>
 
-    </a>
+        <!-- The auction details -->
+        <div class="text-center">
+            <!-- The auction title -->
+            <h4>{{ auction?.title }}</h4>
+            <p>{{ auction?.description }}</p>
 
+            <!-- Expires -->
+            <p>Expires In: {{ expiration }}</p>
+
+            <!-- Starting Bid -->
+            <p>Current Bid: <strong>${{ currentBid }}</strong></p>
+
+            <!-- Total Bids -->
+            <p>Total bids: {{ auction?.bids?.length }}</p>
+
+            <!-- BIN Price -->
+            <p>Buy It Now: <strong>${{ auction?.binPrice }}</strong></p>
+        </div>
+
+    </div>
+    
 </div>

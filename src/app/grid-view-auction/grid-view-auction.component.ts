@@ -4,7 +4,7 @@ import { timeout } from 'rxjs';
 import Auction from '../models/auction.model';
 import { AuctionSyncService } from '../services/auction-sync/auction-sync.service';
 import { AuctionService } from '../services/auction/auction.service';
-import AuctionUtils from '../utils/auction.utils';
+import { AuctionUtils } from '../services/utils/auction.utils';
 
 @Component({
   selector: 'grid-view-auction',
@@ -34,28 +34,29 @@ export class GridViewAuctionComponent {
   // Construct the grid view auction component
   constructor(
     private router: Router,
-    private sync: AuctionSyncService
+    private sync: AuctionSyncService,
+    private utils: AuctionUtils
   ) { }
 
   // Method called when the component is initialized
   ngOnInit(): void {
     // Get the current bid
-    this.currentBid = AuctionUtils.getCurrentBid(this.auction);
+    this.currentBid = this.utils.getCurrentBid(this.auction);
 
     // Refresh the auction every 5 seconds
     if (!this.isDemo) {
       this.auctionRefreshInterval = this.sync.updateAuction(this.auction, 5000, (auction) => {
         // Update current bid
-        this.currentBid = AuctionUtils.getCurrentBid(auction);
+        this.currentBid = this.utils.getCurrentBid(auction);
       });
     }
 
     // Get the formatted expiration
-    this.expiration = AuctionUtils.getFormattedExpiration(this.auction);
+    this.expiration = this.utils.getFormattedExpiration(this.auction);
 
     // Refresh the countdown every second
     this.countdownInterval = setInterval(() => {
-      this.expiration = AuctionUtils.getFormattedExpiration(this.auction);
+      this.expiration = this.utils.getFormattedExpiration(this.auction);
     }, 1000)
   }
 

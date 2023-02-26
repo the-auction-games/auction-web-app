@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { filter, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import Auction from 'src/app/models/auction.model';
-import AuctionUtils from 'src/app/utils/auction.utils';
 import { AuctionService } from '../auction/auction.service';
+import { AuctionUtils } from '../utils/auction.utils';
 import { AuctionSort } from './auction-sort.enum';
 
 @Injectable({
@@ -12,7 +12,8 @@ export class AuctionSearchService {
 
   // Construct the auction service
   constructor(
-    private auctions: AuctionService
+    private auctions: AuctionService,
+    private utils: AuctionUtils
   ) { }
 
   // Get all auctions in the marekt by keyword, price min / max, and sort them
@@ -56,7 +57,7 @@ export class AuctionSearchService {
 
       // Sort by bid price
       case AuctionSort.BID_PRICE:
-        return (a, b) => AuctionUtils.getCurrentBid(a) - AuctionUtils.getCurrentBid(b);
+        return (a, b) => this.utils.getCurrentBid(a) - this.utils.getCurrentBid(b);
 
       // Sort by total bids
       case AuctionSort.TOTAL_BIDS:

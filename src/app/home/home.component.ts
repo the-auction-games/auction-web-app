@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Activity } from '../models/activity.model';
 import Auction from '../models/auction.model';
+import { ActivityService } from '../services/activity/activity.service';
 
 @Component({
   selector: 'app-home',
@@ -43,11 +45,22 @@ export class HomeComponent {
     creationTimestamp: -1,
     expirationTimestamp: new Date().getTime() + 1000 * 60 * 60 * 24 * 7
   }
+  
+  // Recent global activity
+  protected activity: Activity[] = [];
 
   // The home component constructor
-  constructor() { }
+  constructor(private activityService: ActivityService) { }
 
   // The home component on init
   ngOnInit(): void {
+    // Get the recent activity
+    this.activityService.getAll(9).subscribe(activity => {
+      // Set activity
+      this.activity = activity;
+
+      // Log activity
+      console.log(this.activity);
+    });
   }
 }

@@ -54,21 +54,8 @@
             <h1>Recent Activity</h1>
         </div>
 
-        <!-- Demo 10 Activity -->
-        <div class="col-4" *ngFor="let i of [0,1,2,3,4,5,6,7,8]">
-            <div class="p-3 my-1" style="border: 1px solid black; border-radius: 10px;">
-                <div class="row justify-content-center align-items-center">
-                    <div class="col-2">
-                        <i class="fa-solid fa-user"></i>
-                        <i class="fa-solid fa-timer"></i>
-                    </div>
-
-                    <div class="col-6">
-                        New User XYZ
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Activity grid -->
+        <activity-grid [activity]="activity"></activity-grid>
     </div>
 
     <!-- Spacer -->
