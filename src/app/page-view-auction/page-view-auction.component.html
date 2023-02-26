@@ -48,6 +48,11 @@
                 <a routerLink="/account/{{ currentBid?.userId }}" class="link-secondary">{{ topBidderName }}</a>
                 for ${{ currentBid?.price }}.
             </strong>
+
+            <!-- Expired with No Bidder -->
+            <strong *ngIf="!isPurchased() && isExpired() && topBidderName.length == 0" class="mt-auto">
+                Auction expired with no bids.
+            </strong>
         </div>
 
     </div>

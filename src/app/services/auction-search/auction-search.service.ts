@@ -20,8 +20,8 @@ export class AuctionSearchService {
         // Remove expired auctions
         map(auctions => {
           return auctions
-            // Filter out expired auctions
-            .filter(auction => auction.expirationTimestamp > Date.now())
+            // Filter out expired auctions and auctions that have been purchased
+            .filter(auction => auction.expirationTimestamp > Date.now() && auction.purchase == null)
 
             // Filter the auctions by search
             .filter(auction => auction.title.toLowerCase().includes(keyword.toLowerCase()))
@@ -54,7 +54,14 @@ export class AuctionSearchService {
 
       // Sort by bid price
       case AuctionSort.BID_PRICE:
-        return (a, b) => a.bids[a.bids.length - 1].price - b.bids[b.bids.length - 1].price;
+        return (a, b) => {
+          // Get the last bid price or the start bid price
+          let aPrice = a.bids.length > 0 ? a.bids[a.bids.length - 1].price : a.startBid;
+          let bPrice = b.bids.length > 0 ? b.bids[b.bids.length - 1].price : b.startBid;
+
+          // Return the difference
+          return aPrice - bPrice;
+        };
 
       // Sort by total bids
       case AuctionSort.TOTAL_BIDS:

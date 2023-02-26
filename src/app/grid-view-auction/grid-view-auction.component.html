@@ -16,17 +16,19 @@
             <div class="text-center">
                 <!-- The auction title -->
                 <h4>{{ auction?.title }}</h4>
-
-                <!-- Starting Bid -->
-                <p>Current Bid: ${{ auction?.startBid }}</p>
-
                 <p>{{ auction?.description }}</p>
 
                 <!-- Expires -->
-                <p>Expires In: Xs</p>
+                <p>Expires In: {{ expiration }}</p>
+
+                <!-- Starting Bid -->
+                <p>Current Bid: <strong>${{ auction?.startBid }}</strong></p>
 
                 <!-- Total Bids -->
                 <p>Total bids: {{ auction?.bids?.length }}</p>
+
+                <!-- BIN Price -->
+                <p>Buy It Now: <strong>${{ auction?.binPrice }}</strong></p>
             </div>
 
         </div>

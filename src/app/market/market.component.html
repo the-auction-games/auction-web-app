@@ -23,45 +23,80 @@
             <!-- The search form -->
             <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
 
-                <!-- Search by keyword -->
-                <div>
-                    <label for="keyword">Search</label>
-                    <input formControlName="keyword" type="text" id="keyword" class="form-control"
-                        placeholder="Search by keyword">
+                <!-- Align search input -->
+                <div class="row justify-content-center">
+
+                    <!-- Search by keyword -->
+                    <div class="col-12 col-sm-7 col-md-3 my-sm-1">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <div class="form-floating">
+                                <input formControlName="keyword" type="text" id="keyword" class="form-control"
+                                    placeholder="Search">
+                                <label for="keyword">Search</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Get min price -->
+                    <div class="col-12 col-sm-7 col-md-3 my-sm-1">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text">$</span>
+                            <div class="form-floating">
+                                <input formControlName="minPrice" type="number" id="minPrice" class="form-control"
+                                    placeholder="0">
+                                <label for="minPrice">Min Price</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Get max price -->
+                    <div class="col-12 col-sm-7 col-md-3 my-sm-1">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text">$</span>
+                            <div class="form-floating">
+                                <input formControlName="maxPrice" type="number" id="maxPrice" class="form-control"
+                                    placeholder="0">
+                                <label for="maxPrice">Max Price</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Get sort option -->
+                    <div class="col-12 col-sm-7 col-md-3 my-sm-1">
+                        <div class="input-group input-group-sm">
+
+                            <!-- Drop down based off AuctionSort enum -->
+                            <div class="form-floating">    
+                                <select formControlName="sort" id="sort" class="form-select">
+                                    <!-- Loop through sort options -->
+                                    <option *ngFor="let sort of sortOptions" [value]="sort">
+                                        {{sort}}
+                                    </option>
+                                    <!-- Sort Label -->
+                                </select>
+                                <label for="sort">Sort By</label>
+
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
 
-                <!-- Get min price -->
-                <div>
-                    <label for="minPrice">Min Price</label>
-                    <input formControlName="minPrice" type="number" id="minPrice" class="form-control"
-                        placeholder="Min Price">
+                <!-- Align search/reset buttons -->
+                <div class="row justify-content-between mt-1">
+
+                    <!-- Submit button -->
+                    <div class="col-4 text-start">
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+
+                    <!-- Clear button -->
+                    <div class="col-4 text-end">
+                        <button type="button" class="btn btn-secondary" (click)="onResetSearch()">Reset</button>
+                    </div>
                 </div>
-
-                <!-- Get max price -->
-                <div>
-                    <label for="maxPrice">Max Price</label>
-                    <input formControlName="maxPrice" type="number" id="maxPrice" class="form-control"
-                        placeholder="Max Price">
-                </div>
-
-                <div class="">
-                    <!-- Label of sort option -->
-                    <label for="sort">Sort By</label>
-
-                    <!-- Drop down based off AuctionSort enum -->
-                    <select formControlName="sort" class="form-control">
-                        <!-- Loop through sort options -->
-                        <option *ngFor="let sort of sortOptions" [value]="sort">
-                            {{sort}}
-                        </option>
-                    </select>
-                </div>
-
-                <!-- Submit button -->
-                <div class="my-1">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </div>
-
             </form>
         </div>
     </div>

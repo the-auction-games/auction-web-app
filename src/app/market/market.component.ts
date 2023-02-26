@@ -16,27 +16,16 @@ export class MarketComponent {
   // All auctions in the market
   protected allAuctions: Auction[] = [];
 
-  // Object for refreshing
-  protected refresh = {
-    keyword: '',
-    minPrice: Number.MIN_VALUE,
-    maxPrice: Number.MAX_VALUE,
-    sort: AuctionSort.A_Z
-  }
-
-  // The login form
+  // The search form
   protected searchForm = new FormGroup({
-    keyword: new FormControl(this.refresh.keyword),
+    keyword: new FormControl(''),
     minPrice: new FormControl(undefined),
     maxPrice: new FormControl(undefined),
-    sort: new FormControl(this.refresh.sort)
+    sort: new FormControl(AuctionSort.A_Z)
   });
 
   // The sort options
   protected sortOptions = [
-
-    // TODO: LOAD FROM ENUM
-
     AuctionSort.A_Z,
     AuctionSort.Z_A,
     AuctionSort.BID_PRICE,
@@ -46,9 +35,6 @@ export class MarketComponent {
     AuctionSort.NEWEST,
     AuctionSort.OLDEST
   ];
-
-  // Interval id
-  private intervalId: NodeJS.Timer | undefined;
 
   // Construct the market with the auction service
   constructor(
@@ -61,34 +47,16 @@ export class MarketComponent {
     // TODO: INIT IT HERE
 
     // Load all auctions
-    this.refreshAuctions();
-
-    // Load all auctions on init & refresh every 5 seconds\
-    this.intervalId = setInterval(() => {
-      this.refreshAuctions();
-    }, 5000);
-  }
-
-  // Destroy the refresh interval
-  ngOnDestroy(): void {
-    // Clear the interval
-    clearInterval(this.intervalId);
-  }
-
-  // Refresh the auctions
-  private refreshAuctions(): void {
-    // Refresh all auctions that meet the last search requirements
-    this.search.get(this.refresh.keyword, this.refresh.minPrice, this.refresh.maxPrice, this.refresh.sort).subscribe(auctions => this.allAuctions = auctions);
+    this.processSearch();
   }
 
   // Called on submit
   protected onSubmit(): void {
-    // Update the refresh object
-    this.refresh.keyword = this.getKeyword();
-    this.refresh.minPrice = this.getMinPrice();
-    this.refresh.maxPrice = this.getMaxPrice();
-    this.refresh.sort = this.getSort();
+    // Process the search
+    this.processSearch();
+  }
 
+  protected processSearch() {
     // Get the search results and update the page
     this.getSearchResults().subscribe(auctions => this.allAuctions = auctions);
   }
@@ -97,6 +65,16 @@ export class MarketComponent {
   protected getSearchResults(): Observable<Auction[]> {
     // Search for the auctions
     return this.search.get(this.getKeyword(), this.getMinPrice(), this.getMaxPrice(), this.getSort());
+  }
+
+  // Called on reset
+  protected onResetSearch(): void {
+    // Clear the search form
+    this.searchForm.reset();
+    this.searchForm.controls.sort.setValue(AuctionSort.A_Z);
+
+    // Refresh the auctions
+    this.processSearch();
   }
 
   // Get the form keyword or default to empty string
