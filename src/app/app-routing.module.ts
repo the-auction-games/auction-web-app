@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AccountComponent } from './account/account.component';
 import { EditAuctionComponent } from './edit-auction/edit-auction.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -12,6 +13,8 @@ const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },
+  { path: 'account/:accountId', component: AccountComponent, canActivate: [AuthService] },
+  { path: 'account', component: AccountComponent, pathMatch: 'full', canActivate: [AuthService]},
   { path: 'market/new', component: EditAuctionComponent, canActivate: [AuthService] },
   { path: 'market/edit/:auctionId', component: EditAuctionComponent, canActivate: [AuthService] },
   { path: 'market/:auctionId', component: PageViewAuctionComponent, canActivate: [AuthService] },
