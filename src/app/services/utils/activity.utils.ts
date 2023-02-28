@@ -129,7 +129,6 @@ export class ActivityUtils {
         if (diffYears > 0) return `${diffYears}y ago`;
         if (diffMonths > 0) return `${diffMonths}mo ago`;
         if (diffWeeks > 0) return `${diffWeeks}w ago`;
-        if (diffHours > 0) return `${diffHours}h ago`;
         if (diffDays > 0) return `${diffDays}d ago`;
         if (diffHours > 0) return `${diffHours}h ago`;
         if (diffMinutes > 0) return `${diffMinutes}m ago`;
