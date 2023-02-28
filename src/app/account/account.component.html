@@ -1,5 +1,5 @@
 <!-- Base container -->
-<div class="container mt-3">
+<div class="container mt-3" *ngIf="account != undefined">
 
     <!-- Spacer -->
     <div class="row my-3 border-bottom mt-3">
@@ -14,7 +14,7 @@
         </div>
 
         <!-- Generic Profile Image -->
-        <div class="col-6">
+        <div class="col-6 text-center">
             <!-- FA icon for profile -->
             <i class="fa-regular fa-user fa-10x"></i>
         </div>
@@ -23,11 +23,11 @@
         <div class="col-6">
             <div>
                 <h3>Name:</h3>
-                <p>{{ account?.name }}</p>
+                <p>{{ account.name }}</p>
             </div>
             <div class="mt-3">
                 <h3>Contact:</h3>
-                <span>Email: {{ account?.email }}</span>
+                <span>Email: {{ account.email }}</span>
                 <p class="text-muted">Please reach out for business inquiries only.</p>
             </div>
         </div>
@@ -71,4 +71,9 @@
     <!-- Spacer -->
     <div class="row my-3 border-bottom mt-3">
     </div>
+</div>
+
+<!-- Not found -->
+<div *ngIf="account == undefined">
+    <not-found></not-found>
 </div>

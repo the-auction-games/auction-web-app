@@ -22,7 +22,7 @@ import { AuctionUtils } from '../services/utils/auction.utils';
 export class PageViewAuctionComponent {
 
   // The auction
-  protected auction: Auction | undefined;
+  protected auction: Auction | undefined = undefined;
 
   // The seller's name
   protected sellerName: string = '';

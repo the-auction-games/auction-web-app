@@ -18,6 +18,7 @@ import { ActivityGridComponent } from './activity-grid/activity-grid.component';
 import { GridViewActivityComponent } from './grid-view-activity/grid-view-activity.component';
 import { AccountComponent } from './account/account.component';
 import { AuctionGridComponent } from './auction-grid/auction-grid.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { AuctionGridComponent } from './auction-grid/auction-grid.component';
     ActivityGridComponent,
     GridViewActivityComponent,
     AccountComponent,
-    AuctionGridComponent
+    AuctionGridComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
