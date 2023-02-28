@@ -1,17 +1,22 @@
 <!-- Base container -->
 <div class="container mt-3">
 
+    <!-- Spacer -->
+    <div class="row my-3 border-bottom mt-3">
+    </div>
+
     <!-- Details row -->
     <div class="row align-items-center">
 
         <!-- Account Header -->
         <div clas="col-12">
-            <h1 class="text-center border-bottom">Account</h1>
+            <h1 class="text-center">Account</h1>
         </div>
 
         <!-- Generic Profile Image -->
         <div class="col-6">
-            <img src="https://www.w3schools.com/howto/img_avatar.png" class="img-fluid" alt="Responsive image">
+            <!-- FA icon for profile -->
+            <i class="fa-regular fa-user fa-10x"></i>
         </div>
 
         <!-- Account Details -->
@@ -23,19 +28,30 @@
             <div class="mt-3">
                 <h3>Contact:</h3>
                 <span>Email: {{ account?.email }}</span>
-                <p class="text-muted">Please only reach out for business inquiries.</p>
+                <p class="text-muted">Please reach out for business inquiries only.</p>
             </div>
         </div>
     </div>
 
+    <!-- Spacer -->
+    <div class="row my-3 border-bottom mt-3">
+    </div>
+
     <!-- Auctions Row -->
     <div class="row my-3">
-
         <!-- Auctions Header -->
         <div>
-            <h1 class="text-center border-bottom">Auctions</h1>
+            <h1 class="text-center">Auctions</h1>
         </div>
 
+        <!-- Auctions grid -->
+        <div>
+            <auction-grid [auctions]="auctions"></auction-grid>
+        </div>
+    </div>
+
+    <!-- Spacer -->
+    <div class="row my-3 border-bottom mt-3">
     </div>
 
     <!-- Activity Row -->
@@ -43,12 +59,16 @@
 
         <!-- Activity Header -->
         <div>
-            <h1 class="text-center border-bottom">Activity</h1>
+            <h1 class="text-center">Activity</h1>
         </div>
 
         <!-- Activity grid -->
         <div>
             <activity-grid [activity]="activity"></activity-grid>
         </div>
+    </div>
+
+    <!-- Spacer -->
+    <div class="row my-3 border-bottom mt-3">
     </div>
 </div>

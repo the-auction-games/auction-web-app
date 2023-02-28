@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { ActivityGridComponent } from './activity-grid/activity-grid.component';
 import { GridViewActivityComponent } from './grid-view-activity/grid-view-activity.component';
 import { AccountComponent } from './account/account.component';
+import { AuctionGridComponent } from './auction-grid/auction-grid.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AccountComponent } from './account/account.component';
     HomeComponent,
     ActivityGridComponent,
     GridViewActivityComponent,
-    AccountComponent
+    AccountComponent,
+    AuctionGridComponent
   ],
   imports: [
     BrowserModule,
