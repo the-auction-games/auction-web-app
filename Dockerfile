@@ -1,5 +1,5 @@
 # Compile code
-FROM node AS builder
+FROM node:alpine AS builder
 WORKDIR /app
 COPY . .
 RUN npm install
