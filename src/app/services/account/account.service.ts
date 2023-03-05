@@ -10,7 +10,7 @@ import { DaprService } from '../dapr.service';
 export class AccountService extends DaprService {
 
   // Base url
-  private baseUrl: string = 'http://localhost:3504/v1.0/invoke/accountapi/method/api/v1/accounts';
+  private baseUrl: string = super.getSidecarUrl('account-api', 'api/v1/accounts');
 
   // Construct the account validation service with an http client.
   constructor(private http: HttpClient) {
