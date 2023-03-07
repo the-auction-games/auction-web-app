@@ -1,11 +1,19 @@
 <!-- Grid -->
-<div class="container mt-3">
+<div class="container mt-3 text-break" *ngIf="auction != undefined">
 
     <!-- Back to Market Button -->
-    <div class="row my-3">
-        <div>
+    <div class="row justify-content-between align-items-center my-3">
+        <!-- Back to market -->
+        <div class="col text-start">
             <a routerLink="/market" class="btn btn-primary">
                 Back to Market
+            </a>
+        </div>
+
+        <!-- Go back to seller -->
+        <div class="col text-end">
+            <a routerLink="/account/{{ auction.sellerId }}" class="btn btn-primary">
+                View Seller
             </a>
         </div>
     </div>
@@ -16,7 +24,7 @@
         <!-- Logo -->
         <div class="col-sm-6 col-md-5">
             <div class="tag-image-container">
-                <img class="tag-image" src="data:image/png;base64, {{ auction?.base64Image }}" alt="Auction image">
+                <img class="tag-image" src="data:image/png;base64, {{ auction.base64Image }}" alt="Auction image">
             </div>
         </div>
 
@@ -24,22 +32,22 @@
         <div class="col-sm-6 col-md-6">
 
             <!-- Title -->
-            <h4 class="">{{ auction?.title }}</h4>
+            <h4 class="">{{ auction.title }}</h4>
 
             <!-- Description -->
-            <p class="">{{ auction?.description }}</p>
+            <p class="">{{ auction.description }}</p>
 
             <!-- Seller -->
             <p>
                 Seller:
-                <a routerLink="/account/{{ auction?.sellerId }}" class="link-secondary">{{ sellerName }}</a>
+                <a routerLink="/account/{{ auction.sellerId }}" class="link-secondary">{{ sellerName }}</a>
             </p>
 
             <!-- Purchaser -->
             <strong *ngIf="isPurchased()">
                 Purchased by
-                <a routerLink="/account/{{ auction?.purchase?.userId }}" class="link-secondary">{{ purchaserName }}</a>
-                for ${{ auction?.purchase?.price }}.
+                <a routerLink="/account/{{ auction.purchase?.userId }}" class="link-secondary">{{ purchaserName }}</a>
+                for ${{ auction.purchase?.price }}.
             </strong>
 
             <!-- Top Bidder after Expiration -->
@@ -74,7 +82,7 @@
                 <!-- Start Bid -->
                 <div class="col-sm-4">
                     <p>Starting Bid</p>
-                    <p>${{ auction?.startBid }}</p>
+                    <p>${{ auction.startBid }}</p>
                 </div>
 
                 <!-- Current Bid -->
@@ -102,7 +110,7 @@
                 <!-- # of Bids -->
                 <div class="col-sm-4">
                     <p># of Bids</p>
-                    <p>{{ auction?.bids?.length }}</p>
+                    <p>{{ auction.bids.length }}</p>
                 </div>
             </div>
 
@@ -168,7 +176,7 @@
             <div class="row align-items-evenly text-center">
                 <div class="col-sm-12">
                     <p>BIN Price:</p>
-                    <p>${{ auction?.binPrice }}</p>
+                    <p>${{ auction.binPrice }}</p>
                 </div>
             </div>
 
@@ -221,4 +229,8 @@
         </div>
     </div>
 
+</div>
+
+<div *ngIf="auction == undefined">
+    <not-found></not-found>
 </div>

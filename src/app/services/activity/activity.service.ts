@@ -8,8 +8,9 @@ import { DaprService } from '../dapr.service';
   providedIn: 'root'
 })
 export class ActivityService extends DaprService {
+
   // Base url
-  private baseUrl: string = 'http://localhost:3504/v1.0/invoke/activityapi/method/api/v1/activity';
+  private baseUrl: string = super.getSidecarUrl('activity-api', 'api/v1/activity');
 
   // Construct the account validation service with an http client.
   constructor(private http: HttpClient) {

@@ -12,7 +12,7 @@ import { DaprService } from '../dapr.service';
 export class SessionService extends DaprService {
 
   // Base url
-  private baseUrl: string = 'http://localhost:3504/v1.0/invoke/sessionapi/method/api/v1/sessions';
+  private baseUrl: string = super.getSidecarUrl('session-api', 'api/v1/sessions');
 
   // Local storage key
   private localStorageKey: string = 'session';

@@ -102,9 +102,5 @@
     </div>
 
     <!-- The auctions on the market -->
-    <div class="row mt-1">
-        <div *ngFor="let auction of allAuctions" class="col-md-6 col-lg-4 my-1">
-            <grid-view-auction [auction]="auction"></grid-view-auction>
-        </div>
-    </div>
+    <auction-grid [auctions]="allAuctions"></auction-grid>
 </div>

@@ -12,7 +12,7 @@ import { OfferStatus } from './offer-status.enum';
 export class AuctionService extends DaprService {
 
   // Base url
-  private baseUrl: string = 'http://localhost:3504/v1.0/invoke/auctionapi/method/api/v1/auctions';
+  private baseUrl: string = super.getSidecarUrl('auction-api', 'api/v1/auctions');
 
   // Construct the account validation service with an http client.
   constructor(private http: HttpClient) {

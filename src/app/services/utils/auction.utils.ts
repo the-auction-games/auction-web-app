@@ -10,10 +10,10 @@ export class AuctionUtils {
     // Method to check if an auction has been purchased
     public isPurchased(auction?: Auction): boolean {
         // Check if the auction is undefined
-        if (auction === undefined) return false;
+        if (auction == undefined) return false;
 
         // Check if the auction has been purchased
-        return auction.purchase !== null;
+        return auction.purchase != null;
     }
 
     // Method to check if an auction has expired.

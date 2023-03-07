@@ -16,8 +16,8 @@ export class GridViewActivityComponent {
   // The icon
   protected icon: string = '';
 
-  // Remaining time
-  protected remainingTime: string = '';
+  // Activity age
+  protected age: string = '';
 
   // Constructor
   constructor(
@@ -30,8 +30,8 @@ export class GridViewActivityComponent {
     // Set the icon
     this.icon = this.utils.getIcon(this.activity);
 
-    // Set the remaining time
-    this.remainingTime = this.utils.getActivityAge(this.activity);
+    // Set the age
+    this.age = this.utils.getActivityAge(this.activity);
   }
 
   // On view

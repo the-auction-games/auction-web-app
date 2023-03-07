@@ -17,7 +17,6 @@ export class ActivityUtils {
 
     // Inject the account service
     constructor(
-        private auth: AuthService,
         private accounts: AccountService
     ) { }
 
@@ -49,7 +48,7 @@ export class ActivityUtils {
         switch (type) {
             case ActivityType.CREATE_ACCOUNT:
                 description = `${accountName} created a new account`;
-                urlRedirect = `/accounts/${accountId}`;
+                urlRedirect = `/account/${accountId}`;
                 break;
             case ActivityType.CREATE_AUCTION:
                 description = `${accountName} created a new auction`;
@@ -82,16 +81,16 @@ export class ActivityUtils {
         // Return the icon
         switch (activity?.type || '') {
             case ActivityType.CREATE_ACCOUNT:
-                return 'fa-solid fa-user-plus fa-2xl';
+                return 'fa-solid fa-user fa-2xl fa-fw';
             case ActivityType.CREATE_AUCTION:
-                return 'fa-solid fa-shopping-cart fa-2xl';
+                return 'fa-solid fa-shopping-cart fa-2xl fa-fw';
             case ActivityType.CREATE_BID:
-                return 'fa-solid fa-money-bill-wave fa-2xl';
+                return 'fa-solid fa-money-bill-wave fa-2xl fa-fw';
             case ActivityType.PURCHASE_AUCTION:
-                return 'fa-solid fa-gavel fa-2xl';
+                return 'fa-solid fa-gavel fa-2xl fa-fw';
             default:
                 // Unknown
-                return 'fa-solid fa-question fa-2xl';
+                return 'fa-solid fa-question fa-2xl fa-fw';
         }
     }
 
@@ -130,7 +129,6 @@ export class ActivityUtils {
         if (diffYears > 0) return `${diffYears}y ago`;
         if (diffMonths > 0) return `${diffMonths}mo ago`;
         if (diffWeeks > 0) return `${diffWeeks}w ago`;
-        if (diffHours > 0) return `${diffHours}h ago`;
         if (diffDays > 0) return `${diffDays}d ago`;
         if (diffHours > 0) return `${diffHours}h ago`;
         if (diffMinutes > 0) return `${diffMinutes}m ago`;

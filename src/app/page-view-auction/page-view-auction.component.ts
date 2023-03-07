@@ -22,7 +22,7 @@ import { AuctionUtils } from '../services/utils/auction.utils';
 export class PageViewAuctionComponent {
 
   // The auction
-  protected auction: Auction | undefined;
+  protected auction: Auction | undefined = undefined;
 
   // The seller's name
   protected sellerName: string = '';
@@ -147,10 +147,10 @@ export class PageViewAuctionComponent {
     }
 
     // Update the purchaser name
-    if (auction.purchase !== null) {
+    if (auction.purchase != null) {
       this.accounts.getById(auction.purchase.userId).subscribe(account => {
         // Set purchaser name if account is not null
-        if (account !== null) {
+        if (account != null) {
           this.purchaserName = account.name;
         }
       });
@@ -169,7 +169,7 @@ export class PageViewAuctionComponent {
 
   // Check if the user can interact with the auction
   protected canInteract(): boolean {
-    return this.auction !== undefined && !this.isExpired() && !this.isSeller && this.auction?.purchase === null;
+    return this.auction != undefined && !this.isExpired() && !this.isSeller && this.auction?.purchase === null;
   }
 
   // Called when a user tries to bid on an auction.
