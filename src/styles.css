@@ -3,6 +3,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     height: 100vh;
+    word-break: break-word;
 }
 
 .tag-container {
@@ -20,6 +21,14 @@ body {
     color: rgba(255, 255, 255, 0.5);
 }
 
+.tag-login-register {
+    margin: 1rem auto;
+    padding: 10px;
+
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
 
 /* Card */
 .tag-card {
@@ -35,7 +44,6 @@ body {
 .tag-card:hover {
     transform: scale(1.015);
 }
-
 
 /* Card header */
 .tag-card-header {

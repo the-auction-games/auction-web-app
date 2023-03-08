@@ -2,13 +2,20 @@
 <div class="container">
 
     <!-- Auto-adjusting div -->
-    <div class="col-sm-12 col-md-6 px-3 mt-3 mx-auto tag-container">
+    <div class="col-sm-12 col-md-6 tag-login-register">
 
         <!-- Display the login form -->
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
-            <div class="my-3">
+            <div>
                 <h1 class="display-6 text-center">Register</h1>
+                <div class="border-bottom my-3"></div>
+                <p>
+                    Creating an account at The Auction Games allows you to access all of our features, including the
+                    ability to bid on items, purchase items, and create your very own auctions. Please enter your
+                    information below.
+                </p>
+                <div class="border-bottom my-3"></div>
             </div>
 
             <div class="mb-3">
@@ -49,11 +56,17 @@
                 <!-- Submit the form -->
                 <button type="submit" class="btn btn-primary">Register</button>
             </div>
+
+            <!-- Display the error message if the login fails -->
+            <div *ngIf="accountExists">
+                <p class="text-danger">An account already exists with that email.</p>
+            </div>
         </form>
 
-        <!-- Display the error message if the login fails -->
-        <div *ngIf="accountExists">
-            <p class="text-danger">An account already exists with that email.</p>
+        <!-- Display the link to the login page -->
+        <div class="my-3">
+            <p class="text-center">Already have an account? Login <a routerLink="/login">here</a>.</p>
         </div>
+
     </div>
 </div>

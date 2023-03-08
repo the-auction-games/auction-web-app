@@ -2,13 +2,18 @@
 <div class="container">
 
     <!-- Auto-adjusting div -->
-    <div class="col-sm-12 col-md-6 px-3 mt-3 mx-auto tag-container">
+    <div class="col-sm-12 col-md-6 tag-login-register">
 
         <!-- Display the login form -->
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
-            <div class="my-3">
+            <div>
                 <h1 class="display-6 text-center">Login</h1>
+                <div class="border-bottom my-3"></div>
+                <p>
+                    Welcome back to The Auction Games! Please enter your account credentials below.
+                </p>
+                <div class="border-bottom my-3"></div>
             </div>
 
             <div class="mb-3">
@@ -39,11 +44,15 @@
                 <button type="submit" class="btn btn-primary">Login</button>
             </div>
 
+            <!-- Display the error message if the login fails -->
+            <div *ngIf="invalidCredentials">
+                <p class="text-danger">Invalid credentials. Please try again.</p>
+            </div>
         </form>
 
-        <!-- Display the error message if the login fails -->
-        <div *ngIf="invalidCredentials">
-            <p class="text-danger">Invalid credentials. Please try again.</p>
+        <!-- Display the link to the registration page -->
+        <div class="my-3">
+            <p class="text-center">Don't have an account? Register <a routerLink="/register">here</a>.</p>
         </div>
     </div>
 </div>
