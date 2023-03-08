@@ -1,32 +1,50 @@
 <!-- The auction base container -->
-<div class="tag-container h-100" (click)="onView()" style="cursor: pointer">
+<div class="h-100 text-break tag-card" (click)="onView()">
 
-    <div>
+    <div class="tag-card-header">
 
         <!-- The auction image -->
         <div class="tag-image-container">
+
+            <!-- The image -->
             <img class="tag-image" src="data:image/png;base64, {{ auction?.base64Image }}" alt="Auction image">
-        </div>
 
-        <!-- The auction details -->
-        <div class="text-center">
-            <!-- The auction title -->
-            <h4>{{ auction?.title }}</h4>
-            <p>{{ auction?.description }}</p>
-
-            <!-- Expires -->
-            <p>Expires In: {{ expiration }}</p>
-
-            <!-- Starting Bid -->
-            <p>Current Bid: <strong>${{ currentBid }}</strong></p>
-
-            <!-- Total Bids -->
-            <p>Total bids: {{ auction?.bids?.length }}</p>
-
-            <!-- BIN Price -->
-            <p>Buy It Now: <strong>${{ auction?.binPrice }}</strong></p>
+            <!-- Expiration overlay -->
+            <div class="tag-image-overlay">
+                <span class="p-1">
+                    <!-- Hourglas -->
+                    <i class="fa fa-hourglass-half fa-fw"></i>
+                    Expires in {{ expiration }}
+                </span>
+            </div>
         </div>
 
     </div>
-    
+
+    <div class="tag-card-body">
+
+        <div class="pt-1 mx-3 mb-1">
+            <div>
+                <h4>{{ auction?.title }}</h4>
+                <p>{{ getShortDescription() }}</p>
+            </div>
+
+            <div class="d-flex justify-content-between" style="font-size: 18px">
+                <div>
+                    <p>Top Bid</p>
+                    <p><strong>${{ currentBid }}</strong></p>
+                </div>
+                <div>
+                    <p>Total Bids</p>
+                    <p>{{ auction?.bids?.length }} bid(s)</p>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <span>Buy It Now</span>
+                <span><em>${{ auction?.binPrice }}</em></span>
+            </div>
+        </div>
+    </div>
+
 </div>

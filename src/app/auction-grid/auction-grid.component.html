@@ -2,10 +2,10 @@
 <div class="container">
     
     <!-- Create row -->
-    <div class="row">
+    <div class="row justify-content-center justify-content-sm-start">
         
         <!-- Grid of auctions -->
-        <div *ngFor="let auction of auctions" class="col-md-6 col-lg-4 my-1">
+        <div *ngFor="let auction of auctions" class="col-10 col-sm-6 col-md-4 col-lg-3 my-1">
             <grid-view-auction [auction]="auction" [isDemo]="false"></grid-view-auction>
         </div>
            

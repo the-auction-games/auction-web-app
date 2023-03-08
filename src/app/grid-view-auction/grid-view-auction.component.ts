@@ -83,4 +83,16 @@ export class GridViewAuctionComponent {
       this.router.navigate(['/market', this.auction?.id]);
     }
   }
+
+  // Get the short description of the auction
+  protected getShortDescription(): string {
+    // Check if the auction exists
+    if (this.auction) {
+      // Return the first 50 characters of the description
+      return this.auction.description.length > 50 ? this.auction.description.substring(0, 50) + '...' : this.auction.description;
+    } else {
+      // Return empty string
+      return '';
+    }
+  }
 }
