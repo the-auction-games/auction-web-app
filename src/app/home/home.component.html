@@ -11,13 +11,25 @@
         <div class="col-12 col-sm-5 text-center text-sm-start">
             <h1>The Auction Games</h1>
             <p>
-                Welcome to The Auction Games. An online marketplace for buying and selling goods and services.
+                Welcome to The Auction Games: The premier online marketplace for buying and selling goods and services.
+                Create an account to start exploring our diverse range of products and services, and to take advantage
+                of our powerful seller tools.
             </p>
+
+            <!-- Buttons to login / register to your account. -->
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <button class="btn btn-primary" routerLink="register">Create Your Account</button>
+                </div>
+                <div>
+                    <button class="btn btn-outline-primary ms-3" routerLink="login">Login to Existing Account</button>
+                </div>
+            </div>
         </div>
 
         <!-- Logo Image -->
         <div class="col-12 col-sm-5">
-            <div class="tag-image-container">
+            <div class="tag-image-container w-75">
                 <img src="../../assets/logo.png" class="tag-image" alt="Responsive image">
             </div>
         </div>
@@ -38,7 +50,14 @@
 
         <div class="col-12 col-sm-5">
             <h1>How It Works</h1>
-            <p>After registering an account, you can browse the auction marketplace.</p>
+            <p>
+                At The Auction Games, our platform makes it easy to buy and sell goods and services. Users can create an
+                account to browse existing auctions and place bids, or purchase items directly using the buy it now
+                feature. And for sellers, creating an auction is simple and straightforward – just list your goods or
+                services, set your price, and let the bidding begin!
+            </p>
+
+            <button class="btn btn-warning" routerLink="/market/new">List Your Goods or Services</button>
         </div>
     </div>
 
@@ -50,8 +69,13 @@
     <div class="row my-3">
 
         <!-- Recent Activity -->
-        <div class="col-12 text-center">
+        <div class="col-12 col-sm-6 mx-auto">
             <h1>Recent Activity</h1>
+            <p>
+                Stay up-to-date with the latest buyer and seller interactions on The Auction Games with our recent
+                activity section. Here, you'll find a real-time feed of bids, purchases, and auctions posted by our
+                community of buyers and sellers.
+            </p>
         </div>
 
         <!-- Activity grid -->

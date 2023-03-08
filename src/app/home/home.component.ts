@@ -15,7 +15,7 @@ export class HomeComponent {
     id: '-',
     sellerId: '-',
     title: 'Demo Auction',
-    description: 'This is a demo auction.',
+    description: 'This is how auctions appear in the market!',
     startBid: 100,
     bids: [
       {
