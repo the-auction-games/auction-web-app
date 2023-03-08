@@ -1,5 +1,5 @@
 <!-- The auction base container -->
-<div class="h-100 text-break tag-card" (click)="onView()">
+<div class="h-100 tag-card" (click)="onView()">
 
     <div class="tag-card-header">
 
@@ -18,29 +18,33 @@
                 </span>
             </div>
         </div>
-
     </div>
 
-    <div class="tag-card-body">
+    <!-- The Card's body -->
+    <div class="tag-card-body pt-1 mx-3 pb-1">
+        <!-- Display title + short desc -->
+        <div>
+            <h4>{{ auction?.title }}</h4>
+            <p>{{ getShortDescription() }}</p>
+        </div>
 
-        <div class="pt-1 mx-3 mb-1">
+        <!-- Spacer -->
+        <div class="border-bottom mb-3"></div>
+
+        <!-- Bidding / BIN -->
+        <div>
+            <!-- Current bid + total bids -->
             <div>
-                <h4>{{ auction?.title }}</h4>
-                <p>{{ getShortDescription() }}</p>
-            </div>
-
-            <div class="d-flex justify-content-between" style="font-size: 18px">
-                <div>
-                    <p>Top Bid</p>
-                    <p><strong>${{ currentBid }}</strong></p>
-                </div>
-                <div>
-                    <p>Total Bids</p>
-                    <p>{{ auction?.bids?.length }} bid(s)</p>
+                <span>Bidding Starts at:</span>
+                <br>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-start" style="font-size: 24px"><strong>${{ currentBid }}</strong></span>
+                    <span class="text-end">(Total Bids: {{ auction?.bids?.length }})</span>
                 </div>
             </div>
 
-            <div class="d-flex justify-content-between">
+            <!-- Buy it now price -->
+            <div class="d-flex justify-content-between mt-3">
                 <span>Buy It Now</span>
                 <span><em>${{ auction?.binPrice }}</em></span>
             </div>
