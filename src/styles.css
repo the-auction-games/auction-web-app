@@ -6,19 +6,72 @@ body {
     word-break: break-word;
 }
 
+.tag-navbar {
+    background-color: rgb(100, 100, 100);
+}
+
+.tag-nav-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: grayscale(100%) brightness(300%);
+}
+
+.tag-nav-logo:hover {
+    filter: brightness(0%);
+}
+
+.tag-footer-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: grayscale(100%) brightness(300%);
+}
+
+.tag-quote blockquote, .tag-quote figcaption {
+    color: white;
+    font-size: 30px;
+}
+
+.tag-quote figcaption {
+    font-size: 20px;
+}
+
+.tag-nav-link {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-size: 20px;
+}
+
+.tag-nav-link:hover {
+    color: black;
+}
+
 .tag-container {
     padding: 3px;
-    background-color: lightgray; 
-    border-radius: 5px;
 }
 
 .tag-footer {
-    background-color: rgb(170, 170, 170);
+    background-color: rgb(155, 155, 155);
+    border-top: 3px solid rgb(100, 100, 100);
+    /* background-color: rgb(170, 170, 170); */
+}
+
+.tag-footer-icon {
+    margin: 0;
+    padding: 0;
+    filter: grayscale(100%) brightness(1000%);
+}
+
+.tag-footer-icon a:hover {
+    filter: brightness(0%)
 }
 
 .tag-copyright {
-    background-color: rgba(0, 0, 0, 0.1);
-    color: rgba(255, 255, 255, 0.5);
+    background-color: rgb(100, 100, 100);
+    color: rgba(255, 255, 255, 0.80);
+    font-size: 16px;
 }
 
 .tag-login-register {
