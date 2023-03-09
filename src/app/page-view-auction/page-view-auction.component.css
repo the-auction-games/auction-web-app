@@ -74,6 +74,7 @@ a:hover,
     border: 1px solid lightgray;
     border-radius: 5px;
     cursor: zoom-in;
+    background-color: whitesmoke;
 }
 
 /* Zoomed in image */

@@ -9,7 +9,12 @@
             
             <!-- Activity card -->
             <grid-view-activity [activity]="act"></grid-view-activity>
-            
+        
         </div>    
+
+        <!-- Display no activity -->
+        <div *ngIf="activity.length == 0">
+            <p>No activity.</p>
+        </div>
     </div>
 </div>

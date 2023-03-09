@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import Auction from '../models/auction.model';
 import { AuctionSearchService } from '../services/auction-search/auction-search.service';
@@ -18,35 +19,57 @@ export class MarketComponent {
   // The search form
   protected searchForm = new FormGroup({
     keyword: new FormControl(''),
-    minPrice: new FormControl(undefined),
-    maxPrice: new FormControl(undefined),
+    minPrice: new FormControl<number | null>(null),
+    maxPrice: new FormControl<number | null>(null),
     sort: new FormControl(AuctionSort.A_Z)
   });
 
   // The sort options
-  protected sortOptions = [
-    AuctionSort.A_Z,
-    AuctionSort.Z_A,
-    AuctionSort.BID_PRICE,
-    AuctionSort.TOTAL_BIDS,
-    AuctionSort.BIN_PRICE,
-    AuctionSort.TIME_LEFT,
-    AuctionSort.NEWEST,
-    AuctionSort.OLDEST
-  ];
+  protected sortOptions: AuctionSort[] = [];
 
   // Construct the market with the auction service
   constructor(
-    private search: AuctionSearchService
-  ) {}
+    private search: AuctionSearchService,
+    private route: ActivatedRoute,
+  ) { }
 
   // Initialize the market
   ngOnInit(): void {
-    // Init sort options from enum
-    // TODO: INIT IT HERE
+    // Dynamically load enum types
+    this.sortOptions = Object.keys(AuctionSort).map(key => AuctionSort[key as keyof typeof AuctionSort]);
 
-    // Load all auctions
-    this.processSearch();
+    // Load last result if it exists
+    this.route.queryParamMap.subscribe(params => {
+      // The query
+      let query = params.get('useLastResult');
+      let useLastResult = query != null && query.toLowerCase() == 'true';
+
+      // Check if we should use the last result
+      if (useLastResult) {
+        // Get the last search result
+        let result = this.search.getLastResult();
+
+        // Check if there is a last result
+        if (result != null) {
+          // Set the search form
+          this.searchForm.controls.keyword.setValue(result.keyword);
+          this.searchForm.controls.minPrice.setValue(result.minPrice);
+          this.searchForm.controls.maxPrice.setValue(result.maxPrice);
+          this.searchForm.controls.sort.setValue(result.sort);
+
+          // Load the last result
+          result.list.subscribe(auctions => this.allAuctions = auctions);
+        } else {
+          // Don't use the last result, force reset
+          useLastResult = false;
+        }
+      }
+
+      // Reset the search
+      if (!useLastResult) {
+        this.onResetSearch();
+      }
+    });
   }
 
   // Called on submit
