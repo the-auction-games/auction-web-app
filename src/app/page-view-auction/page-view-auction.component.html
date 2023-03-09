@@ -4,233 +4,254 @@
     <!-- Back to Market Button -->
     <div class="row justify-content-between align-items-center my-3">
         <!-- Back to market -->
-        <div class="col text-start">
-            <a routerLink="/market" class="btn btn-primary">
-                Back to Market
-            </a>
-        </div>
-
-        <!-- Go back to seller -->
-        <div class="col text-end">
-            <a routerLink="/account/{{ auction.sellerId }}" class="btn btn-primary">
-                View Seller
+        <div class="col">
+            <a routerLink="/market">
+                <!-- Font awesome left arrow -->
+                <i class="fas fa-arrow-left fa-fw"></i>
+                Back to Results
             </a>
         </div>
     </div>
+
+    <!-- Spacer -->
+    <div class="border-bottom my-3"></div>
 
     <!-- Logo & General Info Row -->
-    <div class="row m-1 tag-container">
+    <div class="row justify-content-center m-1">
 
         <!-- Logo -->
-        <div class="col-sm-6 col-md-5">
-            <div class="tag-image-container">
+        <div class="col-12 col-md-6">
+
+            <!-- Image Container -->
+            <div id="auction-img" class="tag-image-container" (click)="onZoomToggle()">
+                <!-- Image -->
                 <img class="tag-image" src="data:image/png;base64, {{ auction.base64Image }}" alt="Auction image">
+
+                <!-- Expiration overlay -->
+                <div class="tag-image-overlay">
+                    <span class="p-1">
+                        <!-- Hourglas -->
+                        <i class="fa fa-hourglass-half fa-fw"></i>
+                        Expires in {{ formattedExpiration }}
+                    </span>
+                </div>
             </div>
+
+            <!-- Notify user to click to zoom -->
+            <p class="text-muted">Click to Zoom In</p>
         </div>
 
-        <!-- General Info -->
-        <div class="col-sm-6 col-md-6">
+        <!-- Details + Interactions -->
+        <div class="col-12 col-md-6">
 
-            <!-- Title -->
-            <h4 class="">{{ auction.title }}</h4>
+            <!-- Auction Details -->
+            <div>
+                <!-- Title -->
+                <h4 class="">{{ auction.title }}</h4>
 
-            <!-- Description -->
-            <p class="">{{ auction.description }}</p>
+                <!-- Description -->
+                <p class="">{{ auction.description }}</p>
 
-            <!-- Seller -->
-            <p>
-                Seller:
-                <a routerLink="/account/{{ auction.sellerId }}" class="link-secondary">{{ sellerName }}</a>
-            </p>
+                <!-- Seller -->
+                <p>
+                    Seller:
+                    <a routerLink="/account/{{ auction.sellerId }}">{{ sellerName }}</a>
+                </p>
 
-            <!-- Purchaser -->
-            <strong *ngIf="isPurchased()">
-                Purchased by
-                <a routerLink="/account/{{ auction.purchase?.userId }}" class="link-secondary">{{ purchaserName }}</a>
-                for ${{ auction.purchase?.price }}.
-            </strong>
+                <!-- Purchaser -->
+                <strong *ngIf="isPurchased()">
+                    Purchased by
+                    <a routerLink="/account/{{ auction.purchase?.userId }}" class="link-secondary">
+                        {{ purchaserName }}
+                    </a>
+                    for ${{ auction.purchase?.price }}.
+                </strong>
 
-            <!-- Top Bidder after Expiration -->
-            <strong *ngIf="!isPurchased() && isExpired() && topBidderName.length > 0" class="mt-auto">
-                Sold to top bidder
-                <a routerLink="/account/{{ currentBid?.userId }}" class="link-secondary">{{ topBidderName }}</a>
-                for ${{ currentBid?.price }}.
-            </strong>
+                <!-- Top Bidder after Expiration -->
+                <strong *ngIf="!isPurchased() && isExpired() && topBidderName.length > 0" class="mt-auto">
+                    Sold to top bidder
+                    <a routerLink="/account/{{ currentBid?.userId }}" class="link-secondary">{{ topBidderName }}</a>
+                    for ${{ currentBid?.price }}.
+                </strong>
 
-            <!-- Expired with No Bidder -->
-            <strong *ngIf="!isPurchased() && isExpired() && topBidderName.length == 0" class="mt-auto">
-                Auction expired with no bids.
-            </strong>
-        </div>
-
-    </div>
-
-    <!-- Bidding & Purchasing Row -->
-    <div class="row m-1 justify-content-between" *ngIf="!isPurchased() && !isExpired()">
-
-        <!-- Bidding -->
-        <div class="col-md-6 tag-container me-1">
-
-            <!-- Bidding header -->
-            <div class="my-3">
-                <h2 class="text-center">Bidding</h2>
+                <!-- Expired with No Bidder -->
+                <strong *ngIf="!isPurchased() && isExpired() && topBidderName.length == 0" class="mt-auto">
+                    Auction expired with no bids.
+                </strong>
             </div>
 
-            <!-- Bid Info -->
-            <div class="row align-items-evenly text-center">
+            <!-- Display bidding, purchasing, and editing only if the auction has not been purchased or expired -->
+            <div *ngIf="!isPurchased() && !isExpired()">
 
-                <!-- Start Bid -->
-                <div class="col-sm-4">
-                    <p>Starting Bid</p>
-                    <p>${{ auction.startBid }}</p>
+                <!-- Spacer -->
+                <div class="border-bottom my-3"></div>
+
+                <!-- Bidding -->
+                <div>
+
+                    <!-- Bidding header -->
+                    <div class="my-3">
+                        <h4>Bidding</h4>
+                        <p>Please view the following bidding info before placing a bid.</p>
+                    </div>
+
+                    <!-- Bid Info -->
+                    <div id="bidding-info" class="row align-items-evenly text-center">
+
+                        <!-- Start Bid -->
+                        <div class="col-6 col-sm-4 d-flex flex-column align-items-center">
+                            <h6>Starting Bid</h6>
+                            <p class="p-0 my-auto">${{ auction.startBid }}</p>
+                        </div>
+
+                        <!-- Current Bid -->
+                        <div class="col-6 col-sm-4 d-flex flex-column align-items-center">
+                            <h6>Current Bid</h6>
+
+                            <!-- Display no bids yet -->
+                            <p class="p-0 my-auto text-muted" *ngIf="!currentBid">No bids yet.</p>
+
+                            <!-- Display current bid & link to user -->
+                            <p class="p-0 my-auto" *ngIf="currentBid">
+                                <span>
+                                    <a id="current-bid" routerLink="/account/{{ currentBid.userId }}">
+                                        <span *ngIf="currentBid.userId != bidderId"><strong>${{ currentBid.price
+                                                }}</strong></span>
+                                        <span *ngIf="currentBid.userId == bidderId"><strong>${{ currentBid.price
+                                                }}</strong></span>
+                                    </a>
+                                </span>
+                            </p>
+                        </div>
+
+                        <!-- # of Bids -->
+                        <div class="col-12 col-sm-4 d-flex flex-column align-items-center pt-3 pt-sm-0">
+                            <h6># of Bids</h6>
+                            <p class="p-0 my-auto">{{ auction.bids.length }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Bid Input -->
+                    <div class="mt-3">
+
+                        <!-- Bid input info -->
+                        <div>
+                            <p>Place a bid below to compete for the auction.</p>
+                        </div>
+
+                        <!-- Bid Input -->
+                        <div id="bid-input" class="input-group mx-auto">
+
+
+                            <!-- Dollar sign -->
+                            <span class="input-group-text">$</span>
+
+                            <!-- Input form -->
+                            <div class="form-floating">
+                                <input type="number" id="bid" class="form-control" placeholder="0" [formControl]="bid">
+                                <label for="bid">Your Bid</label>
+                            </div>
+
+                            <!-- Button -->
+                            <span class="input-group-text">
+                                <button class="place-bid-btn" disabled *ngIf="!canInteract()">
+                                    <!-- Send off icon -->
+                                    <i class="fa fa-paper-plane fa-fw"></i>
+                                </button>
+
+                                <button class="place-bid-btn" (click)="onBid()" *ngIf="canInteract()">
+                                    <!-- Send off icon -->
+                                    <i class="fa fa-paper-plane fa-fw"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Display validation errors -->
+                    <div class="mx-auto text-center" *ngIf="isBidSubmitted">
+                        <p class="text-danger form-text" *ngIf="bid.invalid">Please provide a bid between $1 -
+                            $2,000,000.
+                        </p>
+                        <p class="text-danger form-text" *ngIf="bid.valid">{{ bidErrorMessage }}</p>
+                    </div>
                 </div>
 
-                <!-- Current Bid -->
-                <div class="col-sm-4">
-                    <p>Current Bid</p>
+                <!-- Spacer -->
+                <div class="border-bottom my-3"></div>
 
-                    <!-- Display no bids yet -->
-                    <p class="text-muted" *ngIf="!currentBid">No bids yet.</p>
+                <!-- Buy It now -->
+                <div>
+                    <!-- BIN header -->
+                    <div class="my-3">
+                        <h4>Buy It Now</h4>
+                        <p>Skip the bidding process and purchase the auction!</p>
+                    </div>
 
-                    <!-- Display current bid & link to user -->
-                    <p *ngIf="currentBid">
-                        <span>
-                            ${{ currentBid.price }}
-                        </span>
-                        <br>
-                        <small class="text-muted">
-                            (<a routerLink="/account/{{ currentBid.userId }}" class="link-secondary">
-                                <span *ngIf="currentBid.userId != bidderId">{{ topBidderName }}</span>
-                                <span *ngIf="currentBid.userId == bidderId">Held By You</span>
-                            </a>)
-                        </small>
-                    </p>
+                    <!-- Purchase Button -->
+                    <div>
+                        <p class="text-center">
+                            <button class="purchase-btn" disabled *ngIf="!canInteract()">
+                                <i class="fa fa-gavel fa-fw me-3"></i>
+                                <span>Purchase for <strong>${{ auction.binPrice }}</strong></span>
+                                <i class="fa fa-gavel fa-fw ms-3"></i>
+                            </button>
+                            <button class="purchase-btn" (click)="onBuy()" *ngIf="canInteract()">
+                                <i class="fa fa-gavel fa-fw me-3"></i>
+                                <span>Purchase for <strong>${{ auction.binPrice }}</strong></span>
+                                <i class="fa fa-gavel fa-fw ms-3"></i>
+                            </button>
+                        </p>
+                    </div>
+
+                    <!-- Display validation errors -->
+                    <div class="mx-auto text-center" *ngIf="isPurchaseSubmitted">
+                        <p class="text-danger form-text">{{ purchaseErrorMessage }}</p>
+                    </div>
                 </div>
 
-                <!-- # of Bids -->
-                <div class="col-sm-4">
-                    <p># of Bids</p>
-                    <p>{{ auction.bids.length }}</p>
-                </div>
-            </div>
+                <!-- Edit if seller -->
+                <div *ngIf="isSeller">
+                    <!-- Spacer -->
+                    <div class="border-bottom my-3"></div>
 
-            <!-- Bid Input -->
-            <div class="row m-1">
+                    <div>
+                        <div class="d-flex justify-content-between">
+                            <!-- Edit header -->
+                            <h4>Edit Auction</h4>
 
-                <!-- Bid Input -->
-                <div class="col-sm-8">
-                    <div class="input-group w-75 mx-auto">
-                        <span class="input-group-text">$</span>
-                        <div class="form-floating">
-                            <input type="number" id="bid" class="form-control" placeholder="0" [formControl]="bid">
-                            <label for="bid">Your Bid</label>
+                            <!-- Edit link -->
+                            <div class="text-end">
+                                <button id="edit-auction-link" (click)="onEdit()">
+                                    Edit Page
+                                    <i class="fas fa-arrow-right fa-fw"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Edit message -->
+                        <div>
+                            <p>You are the seller. This is the public view of your auction. Click the link to edit this
+                                page.</p>
                         </div>
                     </div>
                 </div>
-
-                <!-- Spacer for xs screens -->
-                <div class="w-100 d-block d-sm-none pt-2">
-                </div>
-
-                <!-- Submit Button -->
-                <div class="col-sm-4">
-                    <div class="d-flex align-items-center justify-content-center h-100">
-                        <button class="btn btn-outline-secondary" disabled *ngIf="!canInteract()">Place Bid</button>
-                        <button class="btn btn-primary" (click)="onBid()" *ngIf="canInteract()">Place Bid</button>
-                    </div>
-                </div>
             </div>
-
-            <!-- Display validation errors -->
-            <div class="mx-auto text-center" *ngIf="isBidSubmitted">
-                <p class="text-danger form-text" *ngIf="bid.invalid">Please provide a bid between $1 - $2,000,000.</p>
-                <p class="text-danger form-text" *ngIf="bid.valid">{{ bidErrorMessage }}</p>
-            </div>
-
-            <!-- Bidding Note -->
-            <div>
-                <div class="mx-3 mb-3">
-                    <br>
-                    <h6>Note</h6>
-                    <p>
-                        By placing a bid, you are offering to purchase this product or service at the price you have
-                        provided.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Spacer for sm & xs screens -->
-        <div class="w-100 d-block d-md-none pt-1">
-        </div>
-
-        <!-- BIN -->
-        <div class="col-md-5 tag-container">
-
-            <!-- BIN header -->
-            <div class="my-3">
-                <h2 class="text-center">Buy It Now</h2>
-            </div>
-
-            <!-- BIN Info -->
-            <div class="row align-items-evenly text-center">
-                <div class="col-sm-12">
-                    <p>BIN Price:</p>
-                    <p>${{ auction.binPrice }}</p>
-                </div>
-            </div>
-
-            <!-- BIN Button -->
-            <div class="row m-1">
-
-                <!-- Submit Button -->
-                <div class="col-sm-12">
-                    <div class="d-flex align-items-center justify-content-center h-100 p-2">
-                        <button class="btn btn-outline-secondary" disabled *ngIf="!canInteract()">Buy It Now</button>
-                        <button class="btn btn-primary" (click)="onBuy()" *ngIf="canInteract()">Buy It Now</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Display validation errors -->
-            <div class="mx-auto text-center" *ngIf="isPurchaseSubmitted">
-                <p class="text-danger form-text">{{ purchaseErrorMessage }}</p>
-            </div>
-
-            <!-- BIN Note -->
-            <div>
-                <div class="mx-3 mb-3">
-                    <br>
-                    <h6>Note</h6>
-                    <p>
-                        By clicking 'Buy It Now', you are agreeing to purchase this product or service at the full
-                        price listed above.
-                    </p>
-                </div>
-            </div>
-
         </div>
     </div>
 
-    <!-- Edit Row // Display the edit button if the viewer is the seller -->
-    <div class="row mx-1 tag-container" *ngIf="isSeller">
-
-        <!-- Center-Aligned Edit -->
-        <div class="mx-auto text-center">
-
-            <!-- Edit header -->
-            <div class="my-3">
-                <h2 class="text-center">Edit</h2>
-                <p>You are the seller.</p>
-            </div>
-
-            <!-- Edit Button -->
-            <button type="button" class="btn btn-success mb-3" (click)="onEdit()">Edit Auction</button>
-        </div>
-    </div>
-
+    <!-- Spacer -->
+    <div class="border-bottom my-3"></div>
 </div>
 
+<!-- Zoomed in image -->
+<div id="zoomed-in" hidden (click)="onZoomToggle()">
+    <div class="tag-image-container">
+        <!-- Image -->
+        <img class="tag-image" src="data:image/png;base64, {{ auction?.base64Image }}" alt="Auction image">
+    </div>
+</div>
+
+<!-- Display auction not found -->
 <div *ngIf="auction == undefined">
     <not-found></not-found>
 </div>

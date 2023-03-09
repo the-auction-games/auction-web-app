@@ -55,6 +55,7 @@ body {
     cursor: pointer;
     border: 1px solid lightgray;
     border-radius: 5px;
+    box-shadow: 0 0 5px lightgray;
     overflow: hidden;
     transition: transform 0.2s;
 }

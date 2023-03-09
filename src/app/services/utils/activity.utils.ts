@@ -55,7 +55,7 @@ export class ActivityUtils {
                 urlRedirect = `/market/${auction?.id}`;
                 break;
             case ActivityType.CREATE_BID:
-                description = `${accountName} place a bid on an auction`;
+                description = `${accountName} placed a bid on an auction`;
                 urlRedirect = `/market/${auction?.id}`;
                 break;
             case ActivityType.PURCHASE_AUCTION:

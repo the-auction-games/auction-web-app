@@ -1,0 +1,94 @@
+/* Go back button */
+a,
+button {
+    display: inline-block;
+    border: none;
+    background: none;
+    padding: 2px 5px 4px;
+    text-decoration: none;
+    color: rgb(30, 30, 255);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* Disabled buttons */
+button:disabled {
+    color: gray;
+    cursor: not-allowed;
+}
+
+.place-bid-btn:enabled {
+    color: rgb(30, 30, 255);
+}
+
+/* Purchase button */
+.purchase-btn {
+    border: 1px solid lightgray;
+    padding: 2px 6px 4px;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Enabled purchase button */
+.purchase-btn:enabled {
+    color: rgb(30, 30, 255);
+    box-shadow: 0 0 10px 3px rgb(30, 30, 255);
+}
+
+/* Hover enabled purchase button */
+.purchase-btn:hover:enabled {
+    border: 1px solid rgb(30, 30, 255);
+    box-shadow: 0 0 10px 3px darkgray;
+    background-color: rgb(30, 30, 255);
+    color: white;
+}
+
+/* Go back hover */
+a:hover,
+#edit-auction-link:hover {
+    background-color: whitesmoke;
+    color: black;
+    border-radius: 5px;
+}
+
+/* Bidding info grid */
+#bidding-info {
+    padding: 1rem 0;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    box-shadow: 0 0 5px lightgray;
+}
+
+#current-bid {
+    color: black;
+    font-size: 24px;
+}
+
+/* Bid input */
+#bid-input {
+    margin: 0 1rem;
+}
+
+/* Override image container styles */
+#auction-img {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    cursor: zoom-in;
+}
+
+/* Zoomed in image */
+#zoomed-in {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 75%;
+    z-index: 1;
+    cursor: zoom-out;
+    background-color: whitesmoke;
+}
+
+/* Override font size in expiration overlay */
+.tag-image-overlay {
+    font-size: 20px;
+}

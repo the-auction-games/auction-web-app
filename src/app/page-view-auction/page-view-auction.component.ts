@@ -39,6 +39,12 @@ export class PageViewAuctionComponent {
   // Update timer
   private updateTimer: NodeJS.Timer | undefined = undefined;
 
+  // Expiration timer
+  private expirationTimer: NodeJS.Timer | undefined = undefined;
+
+  // The formatted expiration
+  protected formattedExpiration: string = '';
+
   // The bidder
   protected bidderId: string = '';
 
@@ -118,6 +124,15 @@ export class PageViewAuctionComponent {
 
           // Update the auction every 5 seconds
           this.updateTimer = this.sync.updateAuction(this.auction, 5000, this.updateAuction.bind(this));
+
+          // Update formatted expiration
+          this.formattedExpiration = this.auctionUtils.getFormattedExpiration(this.auction);
+
+          // Update expiration timer
+          this.expirationTimer = setInterval(() => {
+            // Update formatted expiration
+            this.formattedExpiration = this.auctionUtils.getFormattedExpiration(this.auction);
+          }, 1000);
         });
       }
     });
@@ -313,5 +328,24 @@ export class PageViewAuctionComponent {
   protected onEdit(): void {
     // Navigate to the edit auction component
     this.router.navigate(['/market/edit', this.auction?.id]);
+  }
+
+  // Called when a user zooms in on the auction image
+  protected onZoomToggle(): void {
+
+    console.log('zoom toggle');
+
+    // Toggle hidden on element by id zoomed-in
+    let zoomedIn = document.getElementById('zoomed-in');
+
+    if (zoomedIn) {
+      // toggle hidden attribute
+      if (zoomedIn.hasAttribute('hidden')) {
+        zoomedIn.removeAttribute('hidden');
+      } else {
+        zoomedIn.setAttribute('hidden', 'true');
+      }
+
+    }
   }
 }
