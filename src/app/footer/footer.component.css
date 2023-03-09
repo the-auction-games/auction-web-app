@@ -34,10 +34,10 @@
 /* Footer quote styles */
 .tag-quote blockquote, .tag-quote figcaption {
     color: white;
-    font-size: 30px;
+    font-size: 20px;
 }
 
 /* Footer quote figcaption sizing */
 .tag-quote figcaption {
-    font-size: 20px;
+    font-size: 16px;
 }
