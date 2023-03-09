@@ -1,0 +1,17 @@
+/* Activity age */
+.tag-activitiy-age-overlay {
+    font-size: 12px;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+    transition: color 0.5s, background-color 0.5s;
+}
+
+/* Hover effect on activity age */
+.tag-activitiy-age-overlay:hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.75);
+}
