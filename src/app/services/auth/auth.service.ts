@@ -30,12 +30,7 @@ export class AuthService implements CanActivate {
         if (currentAuth != prevAuth) {
 
           // Handle when the session expires
-          if (!currentAuth) {
-            this.onLogout(true);
-          }
-
-          // Update the authentication status
-          this.$isAuthed.next(currentAuth);
+          this.onLogout(true);
         }
       });
     }, 5000);
@@ -60,9 +55,6 @@ export class AuthService implements CanActivate {
           return;
         }
 
-        // Successfully created a session in the cache
-        console.log(`We created a session: ${success}`);
-
         // Set the user as authenticated
         this.$isAuthed.next(true);
 
@@ -84,40 +76,23 @@ export class AuthService implements CanActivate {
         return;
       }
 
-      // Successfully deleted the session
-      console.log(`We deleted the session: ${success}`);
+      // Redirect to login page with timeout
+      this.router.navigate(['/login'], { queryParams: { timeout: expired } });
 
-      // Redirect to the login page
-      this.router.navigate(['/login']);
-
-      // Notify user only when their session expires
-      if (expired) {
-
-        // Notify the user 1 sec after forwaring to login
-        setTimeout(() => {
-          alert('Your session has expired. Please login again');
-        }, 1000);
-
-      } else {
-
-        // Update authentication status only if the session did not expire.
-        // The auth status will automatically be set to false when it expires.
-        this.$isAuthed.next(false);
-      }
+      // Set the user as not authenticated
+      this.$isAuthed.next(false);
     });
   }
 
   // Check if the user can visit a page that requires authentication
   public canActivate(): Observable<boolean> {
 
-    // TODO: GET THE LINK THE USER IS TRYING TO ACCESS SO THAT WE CAN FORWARD THEM AFTER AUTHENTICATION
-
     // Check if the user is authenticated
     return this.isAuthenticated().pipe(
       map(isAuthed => {
         // Redirect to the login page if not logged in
         if (!isAuthed) {
-          this.router.navigate(['/login']); // TODO: SEE ABOVE COMMENT TO FORWARD THE USER TO THE PAGE THEY WERE TRYING TO ACCESS
+          this.router.navigate(['/login']);
         }
 
         // Return if the user is authenicated
@@ -136,10 +111,6 @@ export class AuthService implements CanActivate {
         if (session == null) {
           return false;
         }
-
-        // Log the session
-        // console.log('Checking if session is expired...');
-        // console.log(session);
 
         // Return if the session has expired
         return new Date().getTime() < session.expirationTimestamp;

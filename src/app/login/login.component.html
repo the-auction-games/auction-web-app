@@ -48,6 +48,14 @@
             <div *ngIf="invalidCredentials">
                 <p class="text-danger">Invalid credentials. Please try again.</p>
             </div>
+
+            <!-- Display the timeout message -->
+            <div id="timed-out" class="text-center" *ngIf="timeout && !isSubmitted">
+                <p class="text-danger">
+                    Your session timed out so we logged you out for security reasons. Please login again to access your
+                    account.
+                </p>
+            </div>
         </form>
 
         <!-- Display the link to the registration page -->
