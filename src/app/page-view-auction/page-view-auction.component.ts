@@ -221,6 +221,14 @@ export class PageViewAuctionComponent {
 
         // If the bid was successful
         case OfferStatus.BID_SUCCESS:
+          // Get the bid price
+          let bidPrice = Number(this.bid.value) || 0;
+
+          // Reset bid error message & form
+          this.bidErrorMessage = '';
+          this.isBidSubmitted = false;
+          this.bid.reset();
+
           // Create activity for the new bid
           this.auth.getAccountId().pipe(
             switchMap(accountId => this.activityUtils.createActivityModel(accountId || '', ActivityType.CREATE_BID, this.auction)),
@@ -230,26 +238,10 @@ export class PageViewAuctionComponent {
           });
 
           // Notify of success
-
-          let modal = new bootstrap.Modal(document.getElementById('bid-success-modal'));
-
-          let modal = document.getElementById('bid-success-modal');
-          if (modal) {
-            modal.classList.add('show');
-            modal.style.display = 'block';
-            document.body.classList.add('modal-open');
-          }
-
-
-
-          // TODO: TOGGLE MODAL HERE
-          
-          
-          
-          // Reset bid error message & form
-          this.bidErrorMessage = '';
-          this.isBidSubmitted = false;
-          this.bid.reset();
+          document.getElementById('bid-success')?.toggleAttribute('hidden');
+          setTimeout(() => {
+            document.getElementById('bid-success')?.toggleAttribute('hidden');
+          }, 5000);
           break;
 
         // If the auction is already purchased
@@ -312,14 +304,7 @@ export class PageViewAuctionComponent {
           });
 
           // Notify of success
-
-
-
-          // TODO: TOGGLE MODAL HERE
-          
-          
-          
-          
+          document.getElementById('purchase-success')?.toggleAttribute('hidden');
           break;
 
         // If the auction is already purchased

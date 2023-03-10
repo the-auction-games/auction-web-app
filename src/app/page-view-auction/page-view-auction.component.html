@@ -114,7 +114,8 @@
                             <!-- Display current bid & link to user -->
                             <p class="p-0 my-auto" *ngIf="currentBid">
                                 <span>
-                                    <a id="current-bid" routerLink="/account/{{ currentBid.userId }}" data-bs-toggle="toolt" title="Top Bidder {{ topBidderName }}">
+                                    <a id="current-bid" routerLink="/account/{{ currentBid.userId }}"
+                                        data-bs-toggle="toolt" title="Top Bidder {{ topBidderName }}">
                                         <span *ngIf="currentBid.userId != bidderId"><strong>${{ currentBid.price
                                                 }}</strong></span>
                                         <span *ngIf="currentBid.userId == bidderId"><strong>${{ currentBid.price
@@ -173,6 +174,11 @@
                         </p>
                         <p class="text-danger form-text" *ngIf="bid.valid">{{ bidErrorMessage }}</p>
                     </div>
+
+                    <!-- Display Sucess message -->
+                    <div id="bid-success" class="mx-auto text-center" hidden>
+                        <p class="text-success form-text" style="font-size: 18px;">Bid placed successfully!</p>
+                    </div>
                 </div>
 
                 <!-- Spacer -->
@@ -205,6 +211,11 @@
                     <!-- Display validation errors -->
                     <div class="mx-auto text-center" *ngIf="isPurchaseSubmitted">
                         <p class="text-danger form-text">{{ purchaseErrorMessage }}</p>
+                    </div>
+                 
+                    <!-- Display Sucess message -->
+                    <div id="purchase-success" class="mx-auto text-center" hidden>
+                        <p class="text-success form-text" style="font-size: 18px;">You purchased the auction!</p>
                     </div>
                 </div>
 
@@ -249,27 +260,6 @@
         <img class="tag-image" src="data:image/png;base64, {{ auction?.base64Image }}" alt="Auction image">
     </div>
 </div>
-
-<!-- Modal for success bid -->
-<div class="modal fade" id="bid-success-modal" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Bid Success</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>You have successfully placed a bid of <strong>${{ bid.value }}</strong>!</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-<!-- Modal for success purchase -->
 
 <!-- Display auction not found -->
 <div *ngIf="auction == undefined">

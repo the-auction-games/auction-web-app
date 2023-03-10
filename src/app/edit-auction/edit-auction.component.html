@@ -22,10 +22,14 @@
                 <label for="image" class="form-label">Image</label>
 
                 <!-- Display logo -->
-                <div class="tag-image-container d-flex align-items-center justify-content-center mb-3" *ngIf="url">
+                <div class="tag-image-container d-flex align-items-center justify-content-center mb-3">
                     <!-- Image Preview -->
-                    <img id="image-preview" class="tag-image" src="{{ url }}" />
+                    <img id="image-preview" class="tag-image" src="{{ url }}" *ngIf="url" />
+
+                    <div class="tag-image" *ngIf="!url">
+                    </div>
                 </div>
+
 
                 <!-- Image input -->
                 <div class="py-1">
@@ -37,7 +41,8 @@
                     <div>
                         <small class="form-text text-muted">Accepted Formats: .png, .jpg, .jpeg</small>
                         <br>
-                        <small class="form-text text-muted">Recommended: 1:1 aspect ratio, &gt;500px, transparent background</small>
+                        <small class="form-text text-muted">Recommended: 1:1 aspect ratio, &gt;500px, transparent
+                            background</small>
                     </div>
 
                     <!-- Display validation errors -->
