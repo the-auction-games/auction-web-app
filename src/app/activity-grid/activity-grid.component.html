@@ -2,10 +2,10 @@
 <div class="container">
     
     <!-- Create row -->
-    <div class="row">
+    <div class="row justify-content-center">
         
         <!-- Grid of activity -->
-        <div class="col-sm-6 col-lg-4 my-1" *ngFor="let act of activity">
+        <div class="col-9 col-sm-6 col-lg-4 my-1" *ngFor="let act of activity">
             
             <!-- Activity card -->
             <grid-view-activity [activity]="act"></grid-view-activity>

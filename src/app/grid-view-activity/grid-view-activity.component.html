@@ -1,32 +1,28 @@
 <!-- The activity base container -->
-<div class="h-100 tag-card" (click)="onView()">
+<div class="h-100 position-relative tag-card d-flex align-items-center" (click)="onView()">
 
-    <!-- Border of card -->
-    <div class="p-2 position-relative">
+    <!-- Align card content -->
+    <div class="row justify-content-between align-items-center mt-1 py-2 w-100">
 
-        <!-- Align card content -->
-        <div class="h-100 row justify-content-between align-items-center py-2">
-
-            <!-- Icon -->
-            <div class="col-2 text-center p-0 ms-1">
-                <i class="{{ icon }}"></i>
-            </div>
-
-            <!-- Info -->
-            <div class="col-9 tag-card-body text-center">
-                <!-- Description -->
-                <span style="font-weight: 450;">{{ activity?.description }}</span>
-            </div>
+        <!-- Icon -->
+        <div class="col-4 text-center">
+            <i class="{{ icon }}"></i>
         </div>
 
-        <!-- Age overlay, does not affect regular flow -->
-        <div class="tag-activitiy-age-overlay">
-            <span class="p-1">
-                <!-- Font awesome clock -->
-                <i class="fa-solid fa-clock fa-fw"></i>
-                <!-- Age -->
-                <span class="ps-2">{{ age }}</span>
-            </span>
+        <!-- Info -->
+        <div class="col-8 tag-card-body">
+            <!-- Description -->
+            <span style="font-weight: 450;">{{ activity?.description }}</span>
         </div>
+    </div>
+
+    <!-- Age overlay, does not affect regular flow -->
+    <div class="tag-activitiy-age-overlay">
+        <span class="p-1">
+            <!-- Font awesome clock -->
+            <i class="fa-solid fa-clock fa-fw"></i>
+            <!-- Age -->
+            <span class="ps-2">{{ age }}</span>
+        </span>
     </div>
 </div>

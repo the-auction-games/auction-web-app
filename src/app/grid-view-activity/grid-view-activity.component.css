@@ -15,3 +15,12 @@
     color: white;
     background-color: rgba(0, 0, 0, 0.75);
 }
+
+.tag-card {
+    overflow: hidden;
+    min-height: 50px;
+}
+
+.row {
+    padding: 0;
+}
