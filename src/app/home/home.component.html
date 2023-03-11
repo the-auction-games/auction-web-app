@@ -5,10 +5,10 @@
     </div>
 
     <!-- Basic info row -->
-    <div class="row justify-content-between align-items-center my-3">
+    <div class="row justify-content-md-between justify-content-sm-center align-items-center my-3">
 
         <!-- Title -->
-        <div class="col-12 col-sm-5 text-center text-sm-start">
+        <div class="col-12 col-sm-8 col-md-5">
             <h1>The Auction Games</h1>
             <p>
                 Welcome to The Auction Games: The premier online marketplace for buying and selling goods and services.
@@ -19,18 +19,21 @@
             <!-- Buttons to login / register to your account. -->
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <button class="btn btn-primary" routerLink="register">Create Your Account</button>
+                    <button routerLink="register">Create Your Account</button>
                 </div>
                 <div>
-                    <button class="btn btn-outline-primary ms-3" routerLink="login">Login to Existing Account</button>
+                    <button class="ms-3" routerLink="login">Login to Existing Account</button>
                 </div>
             </div>
         </div>
 
         <!-- Logo Image -->
-        <div class="col-12 col-sm-5">
-            <div class="tag-image-container w-75">
-                <img src="../../assets/logo.png" class="tag-image" alt="Responsive image">
+        <div class="col-4 d-none d-sm-none d-md-block">
+            <div class="d-flex align-items-center justify-content-center">
+
+                <div class="logo-container tag-image-container my-3 w-75">
+                    <img src="../../assets/logo.png" class="tag-image" alt="Responsive image">
+                </div>
             </div>
         </div>
     </div>
@@ -57,7 +60,13 @@
                 services, set your price, and let the bidding begin!
             </p>
 
-            <button class="btn btn-primary" routerLink="/market/new">List Your Goods or Services</button>
+            <!-- Button to create new auction -->
+            <button class="btn btn-primary" routerLink="/market/new">
+                <span>
+                    List Your Goods or Services
+                    <i class="fa fa-arrow-right fa-fw"></i>
+                </span>
+            </button>
         </div>
     </div>
 
