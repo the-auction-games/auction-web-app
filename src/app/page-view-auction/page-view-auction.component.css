@@ -1,23 +1,11 @@
-/* Go back button */
-a,
-button {
-    display: inline-block;
-    border: none;
-    background: none;
-    padding: 2px 5px 4px;
-    text-decoration: none;
-    color: rgb(30, 30, 255);
-    transition: background-color 0.2s, color 0.2s;
-}
-
-/* Disabled buttons */
-button:disabled {
-    color: gray;
-    cursor: not-allowed;
-}
-
+/* Bidding enabled button */
 .place-bid-btn:enabled {
     color: rgb(30, 30, 255);
+}
+
+/* Disable bg on bid btn hover */
+.place-bid-btn:hover {
+    background: none;
 }
 
 /* Purchase button */
@@ -41,14 +29,6 @@ button:disabled {
     box-shadow: 0 0 10px 3px darkgray;
     background-color: rgb(30, 30, 255);
     color: white;
-}
-
-/* Go back hover */
-a:hover,
-#edit-auction-link:hover {
-    background-color: whitesmoke;
-    color: black;
-    border-radius: 5px;
 }
 
 /* Bidding info grid */

@@ -5,7 +5,7 @@
     <div class="row justify-content-between align-items-center my-3">
         <!-- Back to market -->
         <div class="col">
-            <a [routerLink]="['/market']" [queryParams]="{ useLastResult: 'true' }">
+            <a class="tag-link" [routerLink]="['/market']" [queryParams]="{ useLastResult: 'true' }">
                 <!-- Font awesome left arrow -->
                 <i class="fas fa-arrow-left fa-fw"></i>
                 Back to Results
@@ -154,14 +154,14 @@
 
                             <!-- Button -->
                             <span class="input-group-text">
-                                <button class="place-bid-btn" disabled *ngIf="!canInteract()">
+                                <button class="place-bid-btn tag-link p-0 m-0" disabled *ngIf="!canInteract()">
                                     <!-- Send off icon -->
-                                    <i class="fa fa-money-bill-wave fa-fw" data-bs-toggle="toolt" title="Place Bid"></i>
+                                    <i class="fa fa-money-bill-wave fa-fw fa-2x" data-bs-toggle="toolt" title="Place Bid"></i>
                                 </button>
 
-                                <button class="place-bid-btn" (click)="onBid()" *ngIf="canInteract()">
+                                <button class="place-bid-btn tag-link p-0 m-0" (click)="onBid()" *ngIf="canInteract()">
                                     <!-- Send off icon -->
-                                    <i class="fa fa-money-bill-wave fa-fw" data-bs-toggle="toolt" title="Place Bid"></i>
+                                    <i class="fa fa-money-bill-wave fa-fw fa-2x" data-bs-toggle="toolt" title="Place Bid"></i>
                                 </button>
                             </span>
                         </div>
@@ -195,12 +195,12 @@
                     <!-- Purchase Button -->
                     <div>
                         <p class="text-center">
-                            <button class="purchase-btn" disabled *ngIf="!canInteract()">
+                            <button class="purchase-btn tag-link" disabled *ngIf="!canInteract()">
                                 <i class="fa fa-gavel fa-fw me-2"></i>
                                 <span>Purchase for <strong>${{ auction.binPrice }}</strong></span>
                                 <i class="fa fa-gavel fa-fw ms-2"></i>
                             </button>
-                            <button class="purchase-btn" (click)="onBuy()" *ngIf="canInteract()">
+                            <button class="purchase-btn tag-link" (click)="onBuy()" *ngIf="canInteract()">
                                 <i class="fa fa-gavel fa-fw me-2"></i>
                                 <span>Purchase for <strong>${{ auction.binPrice }}</strong></span>
                                 <i class="fa fa-gavel fa-fw ms-2"></i>
@@ -231,7 +231,7 @@
 
                             <!-- Edit link -->
                             <div class="text-end">
-                                <button id="edit-auction-link" (click)="onEdit()">
+                                <button id="edit-auction-link" class="tag-link" (click)="onEdit()">
                                     Edit Page
                                     <i class="fas fa-arrow-right fa-fw"></i>
                                 </button>

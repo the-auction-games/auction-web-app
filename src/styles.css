@@ -7,6 +7,32 @@ body {
     word-break: break-word;
 }
 
+/* Tag Link */
+.tag-link {
+    display: inline-block;
+    border: none;
+    background: none;
+    padding: 2px 5px 4px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(30, 30, 255);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* Link Hover */
+.tag-link:hover {
+    background-color: whitesmoke;
+    color: black;
+    border-radius: 5px;
+}
+
+/* Disabled tag link */
+.tag-link:disabled {
+    color: gray;
+    cursor: not-allowed;
+}
+
 /* Generic container */
 .tag-container {
     margin: 1rem auto;
