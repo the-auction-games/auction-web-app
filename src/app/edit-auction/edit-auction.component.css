@@ -5,6 +5,11 @@
     background-color: white;
 }
 
+/* Limit image size */
 .tag-image {
     max-width: 250px;
+}
+
+.tag-link {
+    font-size: 18px;
 }

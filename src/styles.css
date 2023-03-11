@@ -33,6 +33,11 @@ body {
     cursor: not-allowed;
 }
 
+/* Hover White */
+.tag-hover-white:hover {
+    background-color: white;
+}
+
 /* Generic container */
 .tag-container {
     margin: 1rem auto;
