@@ -19,11 +19,17 @@ export class AccountComponent {
   // The account
   protected account: Account | undefined = undefined;
 
-  // User auctions
-  protected auctions: Auction[] = [];
+  // Seller auctions
+  protected sellerAuctions: Auction[] = [];
+
+  // Purchased auctions
+  protected purchasedAuctions: Auction[] = [];
 
   // User related activity
   protected activity: Activity[] = [];
+
+  // Is the viewer the account owner
+  protected isOwner = false;
 
   // The constructor
   constructor(
@@ -49,6 +55,8 @@ export class AccountComponent {
         observableId = of(accountId);
       } else {
         observableId = this.auth.getAccountId();
+        // Set is owner
+        this.isOwner = true;
       }
 
       // Load account from database
@@ -60,18 +68,36 @@ export class AccountComponent {
 
           // Load auctions
           this.auctionsService.getAll().subscribe(auctions => {
+            // Get seller auctions
+            this.sellerAuctions = auctions.filter(auction => auction.sellerId == account?.id);
 
-            console.log(auctions)
+            // Get purchased / top bid & expired auctions
+            this.purchasedAuctions = auctions.filter(auction => {
+              // Check if purchased
+              let isPurchased = auction.purchase?.userId == account?.id;
 
-            this.auctions = auctions.filter(auction => auction.sellerId == account?.id);
+              // Check if expired
+              let isExpired = auction.expirationTimestamp < new Date().getTime();
 
-            console.log(this.auctions)
+              // Check if the account is the top bidder
+              let isTopBid = isExpired && auction.bids.length > 0 && auction.bids[auction.bids.length - 1].userId == account?.id;
+
+              // Return true if purchased or top bid
+              return isPurchased || isTopBid;
+            });
           });
 
           // Load activity
           this.activityService.getForUser(account?.id || '').subscribe(activity => {
             this.activity = activity;
           });
+
+          // Check if viewer is owner
+          if (!this.isOwner) {
+            this.auth.getAccountId().subscribe(id => {
+              this.isOwner = id == account?.id;
+            });
+          } 
         });
     });
   }

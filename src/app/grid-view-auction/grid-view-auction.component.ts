@@ -22,6 +22,9 @@ export class GridViewAuctionComponent {
   // The current bid
   protected currentBid: number = 0;
 
+  // Is purchased or if the top bidder won
+  protected isPurchasedOrTopBidderWon: boolean = false;
+
   // The auction refresh interval
   private auctionRefreshInterval: NodeJS.Timer | undefined;
 
@@ -43,11 +46,17 @@ export class GridViewAuctionComponent {
     // Get the current bid
     this.currentBid = this.utils.getCurrentBid(this.auction);
 
+    // Check if purchased
+    this.isPurchasedOrTopBidderWon = this.utils.isPurchased(this.auction) || this.utils.didBidderWin(this.auction);
+
     // Refresh the auction every 5 seconds
     if (!this.isDemo) {
       this.auctionRefreshInterval = this.sync.updateAuction(this.auction, 5000, (auction) => {
         // Update current bid
         this.currentBid = this.utils.getCurrentBid(auction);
+
+        // Check if purchased
+        this.isPurchasedOrTopBidderWon = this.utils.isPurchased(this.auction) || this.utils.didBidderWin(this.auction);
       });
     }
 

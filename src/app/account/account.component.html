@@ -5,12 +5,13 @@
     <div class="row my-3 border-bottom mt-3">
     </div>
 
-    <!-- Details row -->
+    <!-- Account Details Info -->
     <div class="row align-items-center">
 
-        <!-- Account Header -->
-        <div clas="col-12">
-            <h1 class="text-center">Account</h1>
+        <!-- Header -->
+        <div class="col-12 text-center mb-3">
+            <h1>Account Information</h1>
+            <p>The following information relates solely to this account.</p>
         </div>
 
         <!-- Generic Profile Image -->
@@ -19,17 +20,18 @@
             <i class="fa-regular fa-user fa-10x"></i>
         </div>
 
-        <!-- Account Details -->
+        <!-- Account info -->
         <div class="col-6">
-            <div>
-                <h3>Name:</h3>
-                <p>{{ account.name }}</p>
-            </div>
-            <div class="mt-3">
-                <h3>Contact:</h3>
-                <span>Email: {{ account.email }}</span>
-                <p class="text-muted">Please reach out for business inquiries only.</p>
-            </div>
+            <h5>Name</h5>
+            <p>{{ account.name }}</p>
+
+            <h5>Email</h5>
+            <span>{{ account.email }}</span>
+            <p class="text-muted">Please reach out for business inquiries only.</p>
+
+            <h5>Account ID:</h5>
+            <span>{{ account.id }}</span>
+            <p class="text-muted">This is only displayed to you, the account owner.</p>
         </div>
     </div>
 
@@ -37,16 +39,35 @@
     <div class="row my-3 border-bottom mt-3">
     </div>
 
-    <!-- Auctions Row -->
+    <!-- Listed Auctions Row -->
     <div class="row my-3">
         <!-- Auctions Header -->
-        <div>
-            <h1 class="text-center">Auctions</h1>
+        <div class="text-center">
+            <h1>From the Seller</h1>
+            <p>The following auctions are from this seller.</p>
         </div>
 
         <!-- Auctions grid -->
         <div>
-            <auction-grid [auctions]="auctions"></auction-grid>
+            <auction-grid [auctions]="sellerAuctions"></auction-grid>
+        </div>
+    </div>
+
+    <!-- Spacer -->
+    <div class="row my-3 border-bottom mt-3">
+    </div>
+
+    <!-- Purchased Auctions Row -->
+    <div class="row my-3">
+        <!-- Auctions Header -->
+        <div class="text-center">
+            <h1>Purchased</h1>
+            <p>The following auctions have been purchased by this account.</p>
+        </div>
+
+        <!-- Auctions grid -->
+        <div>
+            <auction-grid [auctions]="purchasedAuctions"></auction-grid>
         </div>
     </div>
 
@@ -58,8 +79,9 @@
     <div class="activity">
 
         <!-- Activity Header -->
-        <div>
-            <h1 class="text-center">Activity</h1>
+        <div class="text-center">
+            <h1>Recent Activity</h1>
+            <p>The following activity is from this account.</p>
         </div>
 
         <!-- Activity grid -->

@@ -10,7 +10,7 @@
             <img class="tag-image" src="data:image/png;base64, {{ auction?.base64Image }}" alt="Auction image">
 
             <!-- Expiration overlay -->
-            <div class="tag-image-overlay">
+            <div class="tag-image-overlay" *ngIf="!isPurchasedOrTopBidderWon">
                 <span class="p-1">
                     <!-- Hourglas -->
                     <i class="fa fa-hourglass-half fa-fw"></i>
@@ -22,6 +22,7 @@
 
     <!-- The Card's body -->
     <div class="tag-card-body pt-1 mx-3 pb-1">
+        
         <!-- Display title + short desc -->
         <div>
             <h4>{{ auction?.title }}</h4>
@@ -32,7 +33,7 @@
         <div class="border-bottom mb-3"></div>
 
         <!-- Bidding / BIN -->
-        <div>
+        <div *ngIf="!isPurchasedOrTopBidderWon">
             <!-- Current bid + total bids -->
             <div>
                 <span>Bidding Starts at:</span>
@@ -48,6 +49,11 @@
                 <span>Buy It Now</span>
                 <span><em>${{ auction?.binPrice }}</em></span>
             </div>
+        </div>
+
+        <!-- Sold popup -->
+        <div class="pb-3" *ngIf="isPurchasedOrTopBidderWon">
+            <strong>SOLD</strong>
         </div>
     </div>
 

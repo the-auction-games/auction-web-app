@@ -28,7 +28,7 @@
                 <img class="tag-image" src="data:image/png;base64, {{ auction.base64Image }}" alt="Auction image">
 
                 <!-- Expiration overlay -->
-                <div class="tag-image-overlay">
+                <div class="tag-image-overlay" *ngIf="!isPurchased() && !isExpired">
                     <span class="p-1">
                         <!-- Hourglas -->
                         <i class="fa fa-hourglass-half fa-fw"></i>
@@ -61,9 +61,7 @@
                 <!-- Purchaser -->
                 <strong *ngIf="isPurchased()">
                     Purchased by
-                    <a routerLink="/account/{{ auction.purchase?.userId }}">
-                        {{ purchaserName }}
-                    </a>
+                    <a routerLink="/account/{{ auction.purchase?.userId }}">{{ purchaserName }}</a>
                     for ${{ auction.purchase?.price }}.
                 </strong>
 
