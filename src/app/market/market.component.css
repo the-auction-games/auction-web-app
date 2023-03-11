@@ -1,0 +1,22 @@
+/* Override hover effects */
+#reset-btn:hover {
+    color: black;
+}
+
+/* Create auction button */
+#auction-link {
+    box-shadow: 0 0 5px 2px darkgray;
+    border-radius: 5px;
+}
+
+/* Reset button */
+#reset-btn {
+    color: rgb(99, 99, 99);
+}
+
+/* Search button */
+#search-btn {
+    border-radius: 5px;
+    padding: 5px 8px 7px;
+    font-size: 20px;
+}

@@ -8,16 +8,18 @@
     <div class="row justify-content-between align-items-center">
 
         <!-- The market header -->
-        <div class="col-9">
-            <h1>Welcome to the Market</h1>
-            <p>Select an auction from below to view more details.</p>
+        <div class="col-7">
+            <h1>Marketplace Browser</h1>
         </div>
 
         <!-- Create auction button -->
-        <div class="col-2 m-3">
-            <a routerLink="/market/new" class="btn btn-warning">
-                Auction An Item
-            </a>
+        <div class="col-3 m-3">
+            <div class="p-0 m-0 text-end">
+                <a id="auction-link" class="tag-link text-center" routerLink="/market/new">
+                    Auction An Item
+                    <i class="fa-solid fa-arrow-right fa-fw"></i>
+                </a>
+            </div>
         </div>
 
         <!-- The search bar -->
@@ -30,43 +32,22 @@
                 <div class="row justify-content-center">
 
                     <!-- Search by keyword -->
-                    <div class="col-12 col-sm-7 col-md-3 my-sm-1">
+                    <div class="col-12 col-sm-6 col-md-3 my-sm-1">
                         <div class="input-group input-group-sm">
-                            <span class="input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+                            <span class="input-group-text">
+                                <i class="fa-solid fa-terminal"></i>
+                                <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+                            </span>
                             <div class="form-floating">
                                 <input formControlName="keyword" type="text" id="keyword" class="form-control"
-                                    placeholder="Search">
-                                <label for="keyword">Search</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Get min price -->
-                    <div class="col-12 col-sm-7 col-md-3 my-sm-1">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-text">$</span>
-                            <div class="form-floating">
-                                <input formControlName="minPrice" type="number" id="minPrice" class="form-control"
-                                    placeholder="0">
-                                <label for="minPrice">Min Price</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Get max price -->
-                    <div class="col-12 col-sm-7 col-md-3 my-sm-1">
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-text">$</span>
-                            <div class="form-floating">
-                                <input formControlName="maxPrice" type="number" id="maxPrice" class="form-control"
-                                    placeholder="0">
-                                <label for="maxPrice">Max Price</label>
+                                    placeholder="Search Market">
+                                <label for="keyword">Search the Market</label>
                             </div>
                         </div>
                     </div>
 
                     <!-- Get sort option -->
-                    <div class="col-12 col-sm-7 col-md-3 my-sm-1">
+                    <div class="col-12 col-sm-6 col-md-3 my-sm-1 pt-3 pt-sm-0">
                         <div class="input-group input-group-sm">
 
                             <!-- Drop down based off AuctionSort enum -->
@@ -84,19 +65,49 @@
 
                         </div>
                     </div>
+
+                    <!-- Get min price -->
+                    <div class="col-12 col-sm-6 col-md-3 my-sm-1 pt-3 pt-sm-0">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text">$</span>
+                            <div class="form-floating">
+                                <input formControlName="minPrice" type="number" id="minPrice" class="form-control"
+                                    placeholder="0">
+                                <label for="minPrice">Min Price</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Get max price -->
+                    <div class="col-12 col-sm-6 col-md-3 my-sm-1 pt-3 pt-sm-0">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-text">$</span>
+                            <div class="form-floating">
+                                <input formControlName="maxPrice" type="number" id="maxPrice" class="form-control"
+                                    placeholder="0">
+                                <label for="maxPrice">Max Price</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Align search/reset buttons -->
                 <div class="row justify-content-between mt-1">
 
                     <!-- Submit button -->
-                    <div class="col-4 text-start">
-                        <button type="submit" class="btn btn-primary">Search</button>
+                    <div class="col-6 text-start">
+                        <button id="search-btn" class="tag-link" type="submit">
+                            <i class="fa-solid fa-magnifying-glass fa-fw"></i>
+                            Search
+                        </button>
                     </div>
 
                     <!-- Clear button -->
-                    <div class="col-4 text-end">
-                        <button type="button" class="btn btn-secondary" (click)="onResetSearch()">Reset</button>
+                    <div class="col-6 text-end">
+                        <button id="reset-btn" class="tag-link" type="button" (click)="onResetSearch()">
+                            Reset
+                            <i class="fa-solid fa-x fa-fw fa-1x"></i>
+                        </button>
                     </div>
                 </div>
             </form>
