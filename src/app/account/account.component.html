@@ -29,9 +29,11 @@
             <span>{{ account.email }}</span>
             <p class="text-muted">Please reach out for business inquiries only.</p>
 
-            <h5>Account ID:</h5>
-            <span>{{ account.id }}</span>
-            <p class="text-muted">This is only displayed to you, the account owner.</p>
+            <div *ngIf="isOwner">
+                <h5>Account ID:</h5>
+                <span>{{ account.id }}</span>
+                <p class="text-muted">This is only displayed to you, the account owner.</p>
+            </div>
         </div>
     </div>
 
