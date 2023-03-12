@@ -28,9 +28,6 @@ export class AccountComponent {
   // User related activity
   protected activity: Activity[] = [];
 
-  // Is the viewer the account owner
-  protected isOwner = false;
-
   // The constructor
   constructor(
     private route: ActivatedRoute,
@@ -55,8 +52,6 @@ export class AccountComponent {
         observableId = of(accountId);
       } else {
         observableId = this.auth.getAccountId();
-        // Set is owner
-        this.isOwner = true;
       }
 
       // Load account from database
@@ -91,13 +86,6 @@ export class AccountComponent {
           this.activityService.getForUser(account?.id || '').subscribe(activity => {
             this.activity = activity;
           });
-
-          // Check if viewer is owner
-          if (!this.isOwner) {
-            this.auth.getAccountId().subscribe(id => {
-              this.isOwner = id == account?.id;
-            });
-          } 
         });
     });
   }
