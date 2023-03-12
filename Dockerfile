@@ -11,6 +11,8 @@ RUN npm run build:prod
 
 # Production stage: deploy on nginx
 FROM nginx:alpine
+# Copy nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Set environment variables
 ENV SIDECAR_PORT=3500
 # Expose port 80
