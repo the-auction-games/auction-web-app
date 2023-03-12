@@ -1,0 +1,30 @@
+/* Navbar styles */
+.tag-navbar {
+    background-color: rgb(100, 100, 100);
+}
+
+/* Navbar logo styles */
+.tag-nav-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: grayscale(100%) brightness(300%);
+}
+
+/* Navbar logo hover effect */
+.tag-nav-logo:hover {
+    filter: brightness(0%);
+}
+
+/* Nav link */
+.tag-nav-link {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-size: 20px;
+}
+
+/* Nav link hover */
+.tag-nav-link:hover {
+    color: black;
+}

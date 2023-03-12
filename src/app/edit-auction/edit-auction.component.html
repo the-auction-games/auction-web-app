@@ -5,29 +5,45 @@
 
         <!-- Row for Edit Auction Title -->
         <div class="row mt-3">
-            <h1 class="display-6 text-center">Edit Auction</h1>
+            <h1 class="display-6 text-center" *ngIf="!isNew">Edit Auction</h1>
+            <h1 class="display-6 text-center" *ngIf="isNew">New Auction</h1>
         </div>
+
+        <!-- Spacer -->
+        <div class="border-bottom my-3"></div>
 
         <!-- Row for logo, title + desc, bids + buy -->
         <div class="row justify-content-center mt-1 p-1">
 
             <!-- Col for Logo -->
-            <div class="col-12 col-sm-6">
+            <div class="col-10 col-md-4">
 
                 <!-- Image Label -->
                 <label for="image" class="form-label">Image</label>
 
                 <!-- Display logo -->
-                <div class="mx-auto tag-image-container" *ngIf="url">
+                <div class="tag-image-container d-flex align-items-center justify-content-center mb-3">
                     <!-- Image Preview -->
-                    <img id="image-preview" class="tag-image" src="{{ url }}" />
+                    <img id="image-preview" class="tag-image" src="{{ url }}" *ngIf="url" />
+
+                    <div class="tag-image" *ngIf="!url">
+                    </div>
                 </div>
+
 
                 <!-- Image input -->
                 <div class="py-1">
                     <!-- Prompt user to upload an image -->
                     <input type="file" id="image" formControlName="image" class="form-control form-control-sm"
                         accept="image/png, image/jpeg" (change)="onFileChanged($event)">
+
+                    <!-- Image Recommendations -->
+                    <div>
+                        <small class="form-text text-muted">Accepted Formats: .png, .jpg, .jpeg</small>
+                        <br>
+                        <small class="form-text text-muted">Recommended: 1:1 aspect ratio, &gt;500px, transparent
+                            background</small>
+                    </div>
 
                     <!-- Display validation errors -->
                     <div *ngIf="auctionForm.controls.image.invalid && isSubmitted">
@@ -38,17 +54,17 @@
             </div>
 
             <!-- Col for Auction Details -->
-            <div class="col-12 col-sm-6">
+            <div class="col-10 col-md-8">
 
                 <!-- Title Input -->
-                <div class="my-2">
+                <div class="mb-2">
                     <!-- Prompt the user for the title -->
                     <label for="title" class="form-label">Title</label>
                     <input type="text" id="title" formControlName="title" placeholder="Title" class="form-control">
 
                     <!-- Display validation errors -->
                     <div *ngIf="auctionForm.controls.title.invalid && isSubmitted">
-                        <p class="text-danger form-text">Provide a title between 6-20 characters.</p>
+                        <p class="text-danger form-text">Provide a title between 6-40 characters.</p>
                     </div>
                 </div>
 
@@ -66,7 +82,7 @@
                 </div>
 
                 <!-- Bid Input -->
-                <div class="my-2">
+                <div class="mt-2">
                     <!-- Prompt the user for the title -->
                     <div class="input-group">
                         <span class="input-group-text">$</span>
@@ -105,24 +121,34 @@
 
         </div>
 
+        <!-- Spacer -->
+        <div class="border-bottom my-3"></div>
+
         <!-- Row for Cancel, Delete, Save Buttons -->
-        <div class="row justify-content-evenly align-items-center mt-1 p-1">
+        <div class="row justify-content-between align-items-center mt-3">
 
             <!-- Cancel Button -->
-            <div class="col-4 text-center">
-                <button type="button" class="btn btn-outline-secondary" (click)="onCancel()">Cancel</button>
+            <div class="col-4 text-start">
+                <button type="button" class="tag-link tag-hover-white" (click)="onCancel()">
+                    <i class="fa fa-arrow-left fa-fw"></i>
+                    Cancel
+                </button>
             </div>
 
             <!-- Delete Button -->
             <div class="col-4 text-center" data-bs-toggle="modal" data-bs-target="#staticBackdrop" *ngIf="!isNew">
-                <button type="button" class="btn btn-outline-danger">Delete</button>
+                <button type="button" class="tag-link tag-hover-white">
+                    <i class="fa fa-trash fa-fw fa-lg"></i>
+                </button>
             </div>
 
             <!-- Save Button -->
-            <div class="col-4 text-center">
-                <button type="submit" class="btn btn-primary">Save</button>
+            <div class="col-4 text-end">
+                <button type="submit" class="tag-link tag-hover-white">
+                    Save
+                    <i class="fa fa-floppy-o fa-fw fa-lg"></i>
+                </button>
             </div>
-
         </div>
     </div>
 </form>
@@ -151,10 +177,11 @@
             <div class="modal-footer d-flex justify-content-between">
 
                 <!-- Close the modal -->
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="tag-link" data-bs-dismiss="modal">Cancel</button>
 
                 <!-- Delete the auction -->
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="onDelete()">Delete</button>
+                <button type="button" class="tag-link" data-bs-dismiss="modal"
+                    (click)="onDelete()">Delete</button>
             </div>
         </div>
     </div>

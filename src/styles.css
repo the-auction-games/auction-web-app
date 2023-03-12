@@ -1,43 +1,117 @@
+/* Default body styles */
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     height: 100vh;
+    word-break: break-word;
 }
 
-.tag-container {
-    padding: 3px;
-    background-color: lightgray; 
+/* Tag Link */
+.tag-link {
+    display: inline-block;
+    border: none;
+    background: none;
+    padding: 2px 5px 4px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(30, 30, 255);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* Link Hover */
+.tag-link:hover {
+    background-color: whitesmoke;
+    color: black;
     border-radius: 5px;
 }
 
-.tag-footer {
-    background-color: rgb(170, 170, 170);
+/* Disabled tag link */
+.tag-link:disabled {
+    color: gray;
+    cursor: not-allowed;
 }
 
-.tag-copyright {
-    background-color: rgba(0, 0, 0, 0.1);
-    color: rgba(255, 255, 255, 0.5);
+/* Hover White */
+.tag-hover-white:hover {
+    background-color: white;
 }
 
+/* Login / register links */
+.tag-login-register-link {
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    box-shadow: 0 0 5px 0px darkgray;
+    font-size: 20px;
+}
+
+/* Generic container */
+.tag-container {
+    margin: 1rem auto;
+    padding: 10px;
+
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
+
+/* Image container */
 .tag-image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 3px 0px 6px;
-    margin-left: auto;
-    margin-right: auto;
-
-    /* border: 2px solid gray; */
-    border-radius: 15px;
+    position: relative;
     max-width: 100%;
     height: auto;
 }
 
+/* Images */
 .tag-image {
-    width: 250px;
-    height: 250px;
-    max-width: 100%;
-    max-height: 100%;
+    aspect-ratio: 1/1;
+    width: 100%;
+    height: auto;
     object-fit: contain;
+}
+
+/* Image overlay */
+.tag-image-overlay {
+    font-size: 12px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 5px;
+    transition: color 0.5s, background-color 0.5s;
+}
+
+/* Hover effect on image overlay */
+.tag-image-overlay:hover {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+/* Card */
+.tag-card {
+    cursor: pointer;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    box-shadow: 0 0 5px lightgray;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+/* Card hover effect */
+.tag-card:hover {
+    transform: scale(1.015);
+}
+
+/* Card header */
+.tag-card-header {
+    background-color: whitesmoke;
+    padding: 5px
+}
+
+/* Card body */
+.tag-card-body {
+    /* Do nothing */
 }

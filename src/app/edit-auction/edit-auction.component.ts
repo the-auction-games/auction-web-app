@@ -44,7 +44,7 @@ export class EditAuctionComponent {
   // The auction form
   protected auctionForm = new FormGroup({
     image: new FormControl('', []),
-    title: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(20)]),
+    title: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(40)]),
     description: new FormControl('', [Validators.required, Validators.minLength(20), Validators.maxLength(300)]),
     startBid: new FormControl('', [Validators.required, Validators.min(1), Validators.max(1000000)]),
     binPrice: new FormControl('', [Validators.required, Validators.min(1), Validators.max(2000000)]),

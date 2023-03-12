@@ -1,32 +1,60 @@
 <!-- The auction base container -->
-<div class="tag-container h-100" (click)="onView()" style="cursor: pointer">
+<div class="h-100 tag-card" (click)="onView()">
 
-    <div>
+    <div class="tag-card-header">
 
         <!-- The auction image -->
         <div class="tag-image-container">
+
+            <!-- The image -->
             <img class="tag-image" src="data:image/png;base64, {{ auction?.base64Image }}" alt="Auction image">
+
+            <!-- Expiration overlay -->
+            <div class="tag-image-overlay" *ngIf="!isPurchasedOrTopBidderWon">
+                <span class="p-1">
+                    <!-- Hourglas -->
+                    <i class="fa fa-hourglass-half fa-fw"></i>
+                    Expires in {{ expiration }}
+                </span>
+            </div>
         </div>
-
-        <!-- The auction details -->
-        <div class="text-center">
-            <!-- The auction title -->
-            <h4>{{ auction?.title }}</h4>
-            <p>{{ auction?.description }}</p>
-
-            <!-- Expires -->
-            <p>Expires In: {{ expiration }}</p>
-
-            <!-- Starting Bid -->
-            <p>Current Bid: <strong>${{ currentBid }}</strong></p>
-
-            <!-- Total Bids -->
-            <p>Total bids: {{ auction?.bids?.length }}</p>
-
-            <!-- BIN Price -->
-            <p>Buy It Now: <strong>${{ auction?.binPrice }}</strong></p>
-        </div>
-
     </div>
-    
+
+    <!-- The Card's body -->
+    <div class="tag-card-body pt-1 mx-3 pb-1">
+        
+        <!-- Display title + short desc -->
+        <div>
+            <h4>{{ auction?.title }}</h4>
+            <p>{{ getShortDescription() }}</p>
+        </div>
+
+        <!-- Spacer -->
+        <div class="border-bottom mb-3"></div>
+
+        <!-- Bidding / BIN -->
+        <div *ngIf="!isPurchasedOrTopBidderWon">
+            <!-- Current bid + total bids -->
+            <div>
+                <span>Bidding Starts at:</span>
+                <br>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-start" style="font-size: 24px"><strong>${{ currentBid }}</strong></span>
+                    <span class="text-end">(Total Bids: {{ auction?.bids?.length }})</span>
+                </div>
+            </div>
+
+            <!-- Buy it now price -->
+            <div class="d-flex justify-content-between mt-3">
+                <span>Buy It Now</span>
+                <span><em>${{ auction?.binPrice }}</em></span>
+            </div>
+        </div>
+
+        <!-- Sold popup -->
+        <div class="pb-3" *ngIf="isPurchasedOrTopBidderWon">
+            <strong>SOLD</strong>
+        </div>
+    </div>
+
 </div>

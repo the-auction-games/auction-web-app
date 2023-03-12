@@ -16,6 +16,15 @@ export class AuctionUtils {
         return auction.purchase != null;
     }
 
+    // Method to check if a bidder won the auction
+    public didBidderWin(auction?: Auction): boolean {
+        // Check if the auction is undefined
+        if (auction == undefined) return false;
+
+        // Check if the auction has expired
+        return this.isExpired(auction) && auction.bids.length > 0;
+    }
+
     // Method to check if an auction has expired.
     public isExpired(auction?: Auction): boolean {
         // Check if the auction is undefined

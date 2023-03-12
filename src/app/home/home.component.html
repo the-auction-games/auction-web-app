@@ -5,20 +5,35 @@
     </div>
 
     <!-- Basic info row -->
-    <div class="row justify-content-between align-items-center my-3">
+    <div class="row justify-content-md-between justify-content-sm-center align-items-center my-3">
 
         <!-- Title -->
-        <div class="col-12 col-sm-5 text-center text-sm-start">
+        <div class="col-12 col-sm-8 col-md-5">
             <h1>The Auction Games</h1>
             <p>
-                Welcome to The Auction Games. An online marketplace for buying and selling goods and services.
+                Welcome to The Auction Games: The premier online marketplace for buying and selling goods and services.
+                Create an account to start exploring our diverse range of products and services, and to take advantage
+                of our powerful seller tools.
             </p>
+
+            <!-- Buttons to login / register to your account. -->
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <button class="tag-link" routerLink="register">Create Your Account</button>
+                </div>
+                <div>
+                    <button class="tag-link ms-3" routerLink="login">Login to Existing Account</button>
+                </div>
+            </div>
         </div>
 
         <!-- Logo Image -->
-        <div class="col-12 col-sm-5">
-            <div class="tag-image-container">
-                <img src="../../assets/logo.png" class="tag-image" alt="Responsive image">
+        <div class="col-4 d-none d-sm-none d-md-block">
+            <div class="d-flex align-items-center justify-content-center">
+
+                <div class="logo-container tag-image-container my-3 w-75">
+                    <img src="../../assets/logo.png" class="tag-image" alt="Responsive image">
+                </div>
             </div>
         </div>
     </div>
@@ -38,7 +53,20 @@
 
         <div class="col-12 col-sm-5">
             <h1>How It Works</h1>
-            <p>After registering an account, you can browse the auction marketplace.</p>
+            <p>
+                At The Auction Games, our platform makes it easy to buy and sell goods and services. Users can create an
+                account to browse existing auctions and place bids, or purchase items directly using the buy it now
+                feature. And for sellers, creating an auction is simple and straightforward – just list your goods or
+                services, set your price, and let the bidding begin!
+            </p>
+
+            <!-- Button to create new auction -->
+            <button class="tag-link" routerLink="/market/new">
+                <span>
+                    List Your Goods or Services
+                    <i class="fa fa-arrow-right fa-fw"></i>
+                </span>
+            </button>
         </div>
     </div>
 
@@ -50,8 +78,13 @@
     <div class="row my-3">
 
         <!-- Recent Activity -->
-        <div class="col-12 text-center">
+        <div class="col-12 col-sm-6 mx-auto">
             <h1>Recent Activity</h1>
+            <p>
+                Stay up-to-date with the latest buyer and seller interactions on The Auction Games with our recent
+                activity section. Here, you'll find a real-time feed of bids, purchases, and auctions posted by our
+                community of buyers and sellers.
+            </p>
         </div>
 
         <!-- Activity grid -->

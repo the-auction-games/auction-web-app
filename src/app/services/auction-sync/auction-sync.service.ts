@@ -49,7 +49,7 @@ export class AuctionSyncService {
         callback?.(auction);
 
         // Log the update
-        console.log(auction);
+        // console.log(auction);
       }
 
     });

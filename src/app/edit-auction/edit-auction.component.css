@@ -1,0 +1,15 @@
+/* Additional tag image container styles */
+.tag-image-container {
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    background-color: white;
+}
+
+/* Limit image size */
+.tag-image {
+    max-width: 250px;
+}
+
+.tag-link {
+    font-size: 18px;
+}

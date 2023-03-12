@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
 
 @Component({
@@ -22,14 +22,29 @@ export class LoginComponent {
   // Whether or not the credentials are invalid
   invalidCredentials = false;
 
+  // Whether or not the user was timed out
+  protected timeout = false;
+
   // Construct the login component with the auth service  
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
   
   // Initialize the component
   ngOnInit(): void {
+    // Check if the user is already logged in
+    if (this.auth.$isAuthed.value) {
+      // Forward the user to the market page
+      this.router.navigate(['/market'], { queryParams: { useLastResult: true } });
+    }
+
+    // Check if the user was timed out
+    if (this.route.snapshot.queryParams['timeout'] == 'true') {
+      // Set timeout flag
+      this.timeout = true;
+    }
   }
 
   // Method to handle login event
@@ -45,7 +60,7 @@ export class LoginComponent {
       // Check if the login was successful
       if (success) {
         // Forward the user to the market page
-        this.router.navigate(['/market']);
+      this.router.navigate(['/market'], { queryParams: { useLastResult: true } });
       } else {
         // Set the invalid credentials flag
         this.invalidCredentials = true;

@@ -1,0 +1,43 @@
+/* Footer */
+.tag-footer {
+    background-color: rgb(155, 155, 155);
+    border-top: 3px solid rgb(100, 100, 100);
+}
+
+/* Footer icon */
+.tag-footer-icon {
+    margin: 0;
+    padding: 0;
+    filter: grayscale(100%) brightness(1000%);
+}
+
+/* Footer icon hover */
+.tag-footer-icon a:hover {
+    filter: brightness(0%)
+}
+
+/* Footer copyright */
+.tag-copyright {
+    background-color: rgb(100, 100, 100);
+    color: rgba(255, 255, 255, 0.80);
+    font-size: 16px;
+}
+
+/* Footer logo styles */
+.tag-footer-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: grayscale(100%) brightness(300%);
+}
+
+/* Footer quote styles */
+.tag-quote blockquote, .tag-quote figcaption {
+    color: white;
+    font-size: 20px;
+}
+
+/* Footer quote figcaption sizing */
+.tag-quote figcaption {
+    font-size: 16px;
+}

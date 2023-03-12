@@ -2,14 +2,19 @@
 <div class="container">
     
     <!-- Create row -->
-    <div class="row">
+    <div class="row justify-content-center justify-content-sm-start">
         
         <!-- Grid of activity -->
-        <div class="col-sm-6 col-lg-4 my-1" *ngFor="let act of activity">
+        <div class="col-9 col-sm-6 col-lg-4 my-1" *ngFor="let act of activity">
             
             <!-- Activity card -->
             <grid-view-activity [activity]="act"></grid-view-activity>
-            
+        
         </div>    
+
+        <!-- Display no activity -->
+        <div *ngIf="activity.length == 0">
+            <p>No activity.</p>
+        </div>
     </div>
 </div>
