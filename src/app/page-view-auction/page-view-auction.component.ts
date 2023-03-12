@@ -305,6 +305,12 @@ export class PageViewAuctionComponent {
 
           // Notify of success
           document.getElementById('purchase-success')?.toggleAttribute('hidden');
+
+          // 5s later refresh the entire page
+          setTimeout(() => {
+            window.location.reload();
+          }, 5000);
+
           break;
 
         // If the auction is already purchased
