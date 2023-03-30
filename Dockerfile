@@ -1,3 +1,7 @@
+# Note: Environment Variables are only accounted for in the build stage.
+#       They are not overridable in the production stage. Please use a .env file
+#       to override environment variables in the build stage.
+
 # Build stage
 FROM node:lts AS builder
 # Set working directory
@@ -13,8 +17,6 @@ RUN npm run build:prod
 FROM nginx:alpine
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-# Set environment variables
-ENV SIDECAR_PORT=3500
 # Expose port 80
 EXPOSE 80
 # Copy build files from builder stage into nginx

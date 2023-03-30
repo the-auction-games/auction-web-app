@@ -16,10 +16,11 @@ export abstract class DaprService {
     // Get the url for a dapr sidecar
     public getSidecarUrl(service: string, method: string): string {
 
-        // The sidecar port
+        // The dapr sidecar url and port the front end communicates with
+        let url = environment.sidecarHost;
         let port = environment.sidecarPort;
 
         // Return the url
-        return `http://localhost:${port}/v1.0/invoke/${service}/method/${method}`;
+        return `http://${url}:${port}/v1.0/invoke/${service}/method/${method}`;
     }
 }

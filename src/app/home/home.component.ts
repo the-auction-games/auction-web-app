@@ -60,7 +60,7 @@ export class HomeComponent {
       this.activity = activity;
 
       // Log activity
-      console.log(this.activity);
+      // console.log(this.activity);
     });
   }
 }
