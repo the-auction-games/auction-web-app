@@ -20,7 +20,9 @@ export abstract class DaprService {
         let url = environment.sidecarHost;
         let port = environment.sidecarPort;
 
+        let protocol = (port == 443 ? 'https' : 'http') + '://';
+
         // Return the url
-        return `http://${url}:${port}/v1.0/invoke/${service}/method/${method}`;
+        return `${protocol}${url}:${port}/v1.0/invoke/${service}/method/${method}`;
     }
 }
