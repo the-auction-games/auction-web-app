@@ -17,12 +17,14 @@ export abstract class DaprService {
     public getSidecarUrl(service: string, method: string): string {
 
         // The dapr sidecar url and port the front end communicates with
+        let isProduction = environment.production;
         let url = environment.sidecarHost;
         let port = environment.sidecarPort;
 
         let protocol = (port == 443 ? 'https' : 'http') + '://';
+        let namespace = isProduction ? '.default' : '';
 
         // Return the url
-        return `${protocol}${url}:${port}/v1.0/invoke/${service}/method/${method}`;
+        return `${protocol}${url}:${port}/v1.0/invoke/${service}${namespace}/method/${method}`;
     }
 }
