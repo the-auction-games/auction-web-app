@@ -211,6 +211,9 @@ export class EditAuctionComponent {
     if (Number(this.auctionForm.controls.startBid.value) >= Number(this.auctionForm.controls.binPrice.value)) {
       // Set bin price to invalid
       this.auctionForm.controls.binPrice.setErrors({ 'invalid': true });
+
+      // Set form to invalid
+      invalid = true;
     }
 
     // Return if invalid
