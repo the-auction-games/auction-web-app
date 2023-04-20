@@ -50,6 +50,9 @@ export class EditAuctionComponent {
     binPrice: new FormControl('', [Validators.required, Validators.min(1), Validators.max(2000000)]),
   });
 
+  // Whether or not the image is too large
+  protected isImageTooLarge: boolean = false;
+
   // Construct the edit auction component
   constructor(
     private route: ActivatedRoute,
@@ -136,6 +139,16 @@ export class EditAuctionComponent {
       return;
     }
 
+    // Prevent large files
+    if (file.size > 500_000) {
+      this.isImageTooLarge = true;
+      console.log('Image too large');
+      return;
+    }
+
+    // File is valid size
+    this.isImageTooLarge = false;
+
     // Create file reader
     const reader = new FileReader();
     reader.readAsDataURL(file);
@@ -194,6 +207,12 @@ export class EditAuctionComponent {
       invalid = true;
     }
 
+    // Ensure the start bid is less than the bin price
+    if (Number(this.auctionForm.controls.startBid.value) >= Number(this.auctionForm.controls.binPrice.value)) {
+      // Set bin price to invalid
+      this.auctionForm.controls.binPrice.setErrors({ 'invalid': true });
+    }
+
     // Return if invalid
     if (invalid) {
       return;
@@ -234,14 +253,14 @@ export class EditAuctionComponent {
     } else {
       // Update the auction
       this.auctions.update(this.auction).subscribe(success => {
-          // Check if successful
-          if (success) {
-            // Redirect to live listing 
-            this.router.navigate(['market', this.auction.id]);
-          } else {
-            // Notify user of failure
-            alert('Failed to save auction. Please try again.');
-          }
+        // Check if successful
+        if (success) {
+          // Redirect to live listing 
+          this.router.navigate(['market', this.auction.id]);
+        } else {
+          // Notify user of failure
+          alert('Failed to save auction. Please try again.');
+        }
       });
     }
   }

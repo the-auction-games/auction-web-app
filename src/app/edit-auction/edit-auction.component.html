@@ -46,8 +46,8 @@
                     </div>
 
                     <!-- Display validation errors -->
-                    <div *ngIf="auctionForm.controls.image.invalid && isSubmitted">
-                        <p class="text-danger form-text">Provide an image.</p>
+                    <div *ngIf="(auctionForm.controls.image.invalid && isSubmitted) || isImageTooLarge">
+                        <p class="text-danger form-text">Provide an image less than 500KB.</p>
                     </div>
                 </div>
 
@@ -113,7 +113,7 @@
 
                     <!-- Display validation errors -->
                     <div *ngIf="auctionForm.controls.binPrice.invalid && isSubmitted">
-                        <p class="text-danger form-text">Provide a BIN price between $1 - $2,000,000.</p>
+                        <p class="text-danger form-text">Provide a BIN price between $1 - $2,000,000 and greater than the starting bid.</p>
                     </div>
                 </div>
 
